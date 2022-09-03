@@ -94,6 +94,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     StorageReference storageReference;
     String imageId;
     ImageView mIvPopupPicture;
+    SqliteHelper sql;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +107,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         drawerLayout = findViewById(R.id.map_activity_drawer_layout);
         navigationView = findViewById(R.id.map_activity_nav_view);
         toolbar = findViewById(R.id.map_activity_toolbar);
+
+        sql = new SqliteHelper(MapsActivity.this);
 
         setSupportActionBar(toolbar);
 
@@ -280,7 +283,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 for (DiningSpot diningSpot : mDiningSpot)
                 {
-                    if (diningSpot.getmId().equals(marker.getTitle().toString()))
+                    if (diningSpot.getmId().equals(marker.getTitle()))
                     {
                         mtvPopupTitle.setText(diningSpot.getmName());
                         mtvPopupAddress.setText("Address: " + diningSpot.getmAddress());
@@ -321,7 +324,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mBtnPopUpAddToSpinningWheel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(MapsActivity.this, "SUCCESS", Toast.LENGTH_SHORT).show();
+                        for (DiningSpot diningSpot : mDiningSpot)
+                        {
+                            if (diningSpot.getmId().equals(marker.getTitle()))
+                            {
+                                sql.insertFoodChoice(MapsActivity.this, diningSpot.getmId(), diningSpot.getmName());
+                            }
+                        }
                     }
                 });
 
