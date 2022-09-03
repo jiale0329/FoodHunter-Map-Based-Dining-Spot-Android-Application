@@ -255,7 +255,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 PopupWindow popupWindow = new PopupWindow(popupView);
                 popupWindow.setWidth(width-40);
-                popupWindow.setHeight(height/2);
+                popupWindow.setHeight(height/2-10);
                 popupWindow.setFocusable(true);
 
                 popupWindow.showAtLocation(popupView, Gravity.BOTTOM, 0, 150);
@@ -276,7 +276,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 TextView mtvPopupTitle = (TextView) popupView.findViewById(R.id.tvPopupTitle);
                 TextView mtvPopupAddress = (TextView) popupView.findViewById(R.id.tvPopUpAddress);
                 mIvPopupPicture = (ImageView) popupView.findViewById(R.id.ivPopupPicture);
-                Button mBtnAddToSpinningWheel = popupView.findViewById(R.id.btnAddToSpinningWheel);
+                Button mBtnPopUpAddToSpinningWheel = popupView.findViewById(R.id.btnPopUpAddToSpinningWheel);
 
                 for (DiningSpot diningSpot : mDiningSpot)
                 {
@@ -317,6 +317,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 18);
                 mMap.moveCamera(cameraUpdate);
+
+                mBtnPopUpAddToSpinningWheel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(MapsActivity.this, "SUCCESS", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
                 return true;
             }

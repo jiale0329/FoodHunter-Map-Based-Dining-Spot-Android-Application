@@ -41,12 +41,21 @@
         android:textStyle=""/>
 
     <Button
-        android:id="@+id/btnAddToSpinningWheel"
+        android:id="@+id/btnPopUpViewDetails"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add to Spinning Wheel"
+        android:layout_height="40dp"
+        android:text="View Details"
+        android:textSize="12dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"/>
 
+    <Button
+        android:id="@+id/btnPopUpAddToSpinningWheel"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Add to Spinning Wheel"
+        android:textSize="12dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"/>
 
 </LinearLayout>
