@@ -142,7 +142,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mBtnSpinningWheel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MapsActivity.this, SpinningWheel.class);
+                Intent intent = new Intent(MapsActivity.this, PreviewSpinningWheelChoice.class);
                 startActivity(intent);
             }
         });

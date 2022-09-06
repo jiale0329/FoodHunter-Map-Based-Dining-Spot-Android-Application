@@ -42,16 +42,21 @@ public class SpinningWheel extends AppCompatActivity {
         mDiningChoice = sql.readDiningChoice();
 
         for (DiningChoice diningChoice : mDiningChoice){
-            if (count % 2 == 0){
+            if (count % 3 == 0){
                 WheelItem wheelItem1 = new WheelItem(ResourcesCompat.getColor(getResources(),
-                        R.color.purple_200, null), BitmapFactory.decodeResource(getResources(), R.drawable.empty_icon),
+                        R.color.shimmeringBlush, null), BitmapFactory.decodeResource(getResources(), R.drawable.empty_icon),
                         diningChoice.getmName());
                 wheelItemList.add(wheelItem1);
-            }else if (count % 2 == 1){
+            }else if (count % 3 == 1){
                 WheelItem wheelItem2 = new WheelItem(ResourcesCompat.getColor(getResources(),
-                        R.color.teal_200, null), BitmapFactory.decodeResource(getResources(), R.drawable.empty_icon),
+                        R.color.turquoiseGreen, null), BitmapFactory.decodeResource(getResources(), R.drawable.empty_icon),
                         diningChoice.getmName());
                 wheelItemList.add(wheelItem2);
+            }else if (count % 3 == 2){
+                WheelItem wheelItem3 = new WheelItem(ResourcesCompat.getColor(getResources(),
+                        R.color.lemonMeringue, null), BitmapFactory.decodeResource(getResources(), R.drawable.empty_icon),
+                        diningChoice.getmName());
+                wheelItemList.add(wheelItem3);
             }
             count++;
         }
@@ -72,10 +77,7 @@ public class SpinningWheel extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Random random = new Random();
-                points = random.nextInt(wheelItemList.size()+1);
-                if (points == 0){
-                    points = 1;
-                }
+                points = random.nextInt(wheelItemList.size()) + 1;
 
                 mLwFoodChoice.rotateWheelTo(points);
             }

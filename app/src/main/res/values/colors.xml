@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="chineseWhite">#D4EEE3</color>
+    <color name="whiteChocolate">#E5EBD7</color>
+    <color name="antiqueWhite">#F6E8DE</color>
+    <color name="weldonBlue">#819FB3</color>
+    <color name="mountbattenPink">#996D99</color>
+    <color name="turquoiseGreen">#9BCFB6</color>
+    <color name="shimmeringBlush">#D68D96</color>
+    <color name="lemonMeringue">#F3E7BE</color>
 </resources>
