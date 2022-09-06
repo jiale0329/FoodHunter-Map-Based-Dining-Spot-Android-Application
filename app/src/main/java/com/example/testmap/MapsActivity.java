@@ -95,6 +95,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     String imageId;
     ImageView mIvPopupPicture;
     SqliteHelper sql;
+    Button mBtnSpinningWheel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,11 +103,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_maps);
 
         DiningSpotLab diningSpotLab = DiningSpotLab.get(MapsActivity.this);
-        mDiningSpot = diningSpotLab.getComplaints();
+        mDiningSpot = diningSpotLab.getDiningSpots();
 
         drawerLayout = findViewById(R.id.map_activity_drawer_layout);
         navigationView = findViewById(R.id.map_activity_nav_view);
         toolbar = findViewById(R.id.map_activity_toolbar);
+        mBtnSpinningWheel = findViewById(R.id.btnNavigateToSpinningWheel);
 
         sql = new SqliteHelper(MapsActivity.this);
 
@@ -137,6 +139,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+        mBtnSpinningWheel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapsActivity.this, SpinningWheel.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

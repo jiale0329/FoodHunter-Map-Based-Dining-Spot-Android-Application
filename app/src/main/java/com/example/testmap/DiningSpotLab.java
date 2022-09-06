@@ -61,11 +61,11 @@ public class DiningSpotLab {
                 });
     }
 
-    public List<DiningSpot> getComplaints(){
+    public List<DiningSpot> getDiningSpots(){
         return mDiningSpot;
     }
 
-    public DiningSpot getComplaint(UUID id){
+    public DiningSpot getDiningSpot(UUID id){
         for (DiningSpot diningSpot : mDiningSpot){
             if (diningSpot.getmId().equals(id)){
                 return diningSpot;
