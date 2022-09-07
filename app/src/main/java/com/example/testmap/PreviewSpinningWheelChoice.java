@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -61,7 +62,9 @@ public class PreviewSpinningWheelChoice extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                sql.removeDiningChoice(viewHolder.itemView.getTag().toString());
+                                mDiningChoice.remove(viewHolder.getAdapterPosition());
+                                adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {

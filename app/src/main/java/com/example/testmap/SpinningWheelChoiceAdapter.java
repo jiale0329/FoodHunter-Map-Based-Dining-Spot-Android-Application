@@ -36,6 +36,8 @@ public class SpinningWheelChoiceAdapter extends RecyclerView.Adapter<SpinningWhe
     public void onBindViewHolder(@NonNull SpinningWheelChoiceHolder holder, int position) {
         DiningChoice diningChoice = mDiningChoice.get(position);
         holder.bindDiningChoice(diningChoice);
+
+        holder.itemView.setTag(diningChoice.getmId());
     }
 
     @Override

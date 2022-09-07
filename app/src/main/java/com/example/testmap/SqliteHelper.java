@@ -56,4 +56,9 @@ public class SqliteHelper extends SQLiteOpenHelper {
         cursorDiningChoice.close();
         return diningChoiceArrayList;
     }
+
+    public void removeDiningChoice(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("Foodchoice", "id ='" + id + "'", null);
+    }
 }
