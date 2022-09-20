@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import org.opencv.android.OpenCVLoader;
+
 import java.util.ArrayList;
 
 public class PreviewSpinningWheelChoice extends AppCompatActivity {
@@ -33,6 +35,12 @@ public class PreviewSpinningWheelChoice extends AppCompatActivity {
 
         mRv = (RecyclerView) findViewById(R.id.rvSpinningWheelChoice);
         mBtnConfirmSpinningWheelChoice = findViewById(R.id.btnConfirmSpinningWheelChoice);
+
+        if (!OpenCVLoader.initDebug()){
+            Toast.makeText(this, "OPENCV NOT INSTALL", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, "OPENCV INSTALLED SUCCESSFULLY", Toast.LENGTH_SHORT).show();
+        }
 
         sql = new SqliteHelper(PreviewSpinningWheelChoice.this);
         mDiningChoice = sql.readDiningChoice();
