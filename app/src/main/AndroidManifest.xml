@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestMap">
-        <activity android:name=".PreviewSpinningWheelChoice"></activity>
+        <activity android:name=".SimilarityCalculation"></activity>
+        <activity android:name=".ChoosePicture" />
+        <activity android:name=".PreviewSpinningWheelChoice" />
         <activity android:name=".SpinningWheel" />
         <activity android:name=".BillActivity" />
         <!--

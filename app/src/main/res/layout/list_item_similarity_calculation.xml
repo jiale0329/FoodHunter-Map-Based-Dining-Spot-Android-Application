@@ -8,13 +8,14 @@
     app:cardCornerRadius="10dp"
     app:cardBackgroundColor="#FAFCFB">
 
+
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="49dp">
 
         <TextView
-            android:id="@+id/list_item_choice_title"
+            android:id="@+id/list_item_similarity_title"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_alignParentStart="true"
@@ -30,6 +31,19 @@
             android:textColor="@color/black"
             android:textSize="17dp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/list_item_similarity_calculation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+
+            android:text="TextView" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

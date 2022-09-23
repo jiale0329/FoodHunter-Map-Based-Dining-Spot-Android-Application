@@ -36,12 +36,6 @@ public class PreviewSpinningWheelChoice extends AppCompatActivity {
         mRv = (RecyclerView) findViewById(R.id.rvSpinningWheelChoice);
         mBtnConfirmSpinningWheelChoice = findViewById(R.id.btnConfirmSpinningWheelChoice);
 
-        if (!OpenCVLoader.initDebug()){
-            Toast.makeText(this, "OPENCV NOT INSTALL", Toast.LENGTH_SHORT).show();
-        }else {
-            Toast.makeText(this, "OPENCV INSTALLED SUCCESSFULLY", Toast.LENGTH_SHORT).show();
-        }
-
         sql = new SqliteHelper(PreviewSpinningWheelChoice.this);
         mDiningChoice = sql.readDiningChoice();
 

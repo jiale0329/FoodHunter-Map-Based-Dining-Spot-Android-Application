@@ -95,7 +95,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     String imageId;
     ImageView mIvPopupPicture;
     SqliteHelper sql;
-    Button mBtnSpinningWheel;
+    Button mBtnSpinningWheel, mBtnNavigateToChoosePicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +109,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         navigationView = findViewById(R.id.map_activity_nav_view);
         toolbar = findViewById(R.id.map_activity_toolbar);
         mBtnSpinningWheel = findViewById(R.id.btnNavigateToSpinningWheel);
+        mBtnNavigateToChoosePicture = findViewById(R.id.btnNavigateToChoosePicture);
 
         sql = new SqliteHelper(MapsActivity.this);
 
@@ -143,6 +144,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MapsActivity.this, PreviewSpinningWheelChoice.class);
+                startActivity(intent);
+            }
+        });
+
+        mBtnNavigateToChoosePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapsActivity.this, ChoosePicture.class);
                 startActivity(intent);
             }
         });
