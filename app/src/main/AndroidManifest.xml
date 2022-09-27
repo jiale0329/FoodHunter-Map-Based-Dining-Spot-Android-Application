@@ -16,7 +16,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestMap">
-        <activity android:name=".SimilarityCalculation"></activity>
+        <activity android:name=".UserLogin">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".UserRegister"/>
+        <activity android:name=".SimilarityCalculation" />
         <activity android:name=".ChoosePicture" />
         <activity android:name=".PreviewSpinningWheelChoice" />
         <activity android:name=".SpinningWheel" />
@@ -35,13 +43,7 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>

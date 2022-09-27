@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
@@ -384,6 +385,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             case R.id.nav_bill:
                 Intent intent = new Intent(MapsActivity.this, BillActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.nav_logout:
+                SharedPreferences myPreferences = getSharedPreferences("myPreferences", MODE_PRIVATE);
+                SharedPreferences.Editor spEditor = UserLogin.mPreferences.edit();
+                spEditor.clear();
+                spEditor.apply();
+                Intent q = new Intent(MapsActivity.this, UserLogin.class);
+                startActivity(q);
+                finish();
                 break;
         }
 

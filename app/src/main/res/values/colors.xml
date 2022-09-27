@@ -15,4 +15,10 @@
     <color name="turquoiseGreen">#9BCFB6</color>
     <color name="shimmeringBlush">#D68D96</color>
     <color name="lemonMeringue">#F3E7BE</color>
+    <color name="peach">#FFF0D3</color>
+    <color name="red">#FF7373</color>
+    <color name="gray">#D5D4D4</color>
+    <color name="darkerGray">#9E9E9E</color>
+
+
 </resources>
