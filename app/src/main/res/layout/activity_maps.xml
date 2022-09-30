@@ -13,9 +13,9 @@
         android:id="@+id/map_activity_nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_gravity="start"
         map:headerLayout="@layout/header"
-        map:menu="@menu/main_menu"
-        android:layout_gravity="start">
+        map:menu="@menu/main_menu">
 
     </com.google.android.material.navigation.NavigationView>
 

@@ -385,6 +385,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             case R.id.nav_bill:
                 Intent intent = new Intent(MapsActivity.this, BillActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.nav_logout:
                 SharedPreferences myPreferences = getSharedPreferences("myPreferences", MODE_PRIVATE);
