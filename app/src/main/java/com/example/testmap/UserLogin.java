@@ -45,6 +45,7 @@ public class UserLogin extends AppCompatActivity {
     private final String KEY_USER_NAME = "userName";
     private final String KEY_PASSWORD = "password";
     private final String KEY_USER_EMAIL = "userEmail";
+    private final String KEY_USER_ID = "userId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class UserLogin extends AppCompatActivity {
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
 
-        mPreferences = getSharedPreferences("myPreferences", MODE_PRIVATE);
+        mPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
 
         if (mPreferences.contains(KEY_USER_EMAIL) && mPreferences.contains(KEY_PASSWORD)) {
             Intent i = new Intent(UserLogin.this, MapsActivity.class);
@@ -121,6 +122,7 @@ public class UserLogin extends AppCompatActivity {
                                                         editor.putString(KEY_USER_EMAIL, etEmail.getText().toString());
                                                         editor.putString(KEY_PASSWORD, etPassword.getText().toString());
                                                         editor.putString(KEY_USER_NAME, userName);
+                                                        editor.putString(KEY_USER_ID, document.getId().toString());
                                                         editor.apply();
                                                     }
                                                 }

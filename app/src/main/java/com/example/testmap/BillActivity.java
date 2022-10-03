@@ -9,16 +9,19 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.util.Log;
@@ -27,7 +30,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -35,22 +45,46 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BillActivity extends AppCompatActivity {
 
     Button mBtnAddNewBillRecord;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    RecyclerView mRvBillRecord;
+    private List<BillRecord> mBillRecord = new ArrayList<>();
+    BillRecordAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bill);
 
+        mRvBillRecord = findViewById(R.id.rvBillRecord);
         mBtnAddNewBillRecord = findViewById(R.id.btnAddNewBillRecord);
         drawerLayout = findViewById(R.id.bill_activity_drawer_layout);
         navigationView = findViewById(R.id.bill_activity_nav_view);
         toolbar = findViewById(R.id.bill_activity_toolbar);
+
+        BillRecordLab billRecordLab = BillRecordLab.get(BillActivity.this);
+        mBillRecord = billRecordLab.getBillRecords();
+
+        ProgressDialog dialog = ProgressDialog.show(BillActivity.this, "",
+                "Loading......", true);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                mRvBillRecord.setLayoutManager(new LinearLayoutManager(BillActivity.this));
+                adapter = new BillRecordAdapter(mBillRecord, BillActivity.this);
+                mRvBillRecord.setAdapter(adapter);
+                dialog.dismiss();
+            }
+        }, 3000);
+
+        setSupportActionBar(toolbar);
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -70,7 +104,10 @@ public class BillActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }    private void checkMyPermission() {
+
+    }
+
+    private void checkMyPermission() {
         Dexter.withContext(this).withPermission(Manifest.permission.READ_CONTACTS).withListener(new PermissionListener() {
             @Override
             public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {

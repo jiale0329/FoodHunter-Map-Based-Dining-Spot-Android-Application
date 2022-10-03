@@ -54,8 +54,6 @@ public class DiningSpotLab {
 //                            set.add(document.getId().toString());
                                 }
                             }
-                        } else {
-
                         }
                     }
                 });

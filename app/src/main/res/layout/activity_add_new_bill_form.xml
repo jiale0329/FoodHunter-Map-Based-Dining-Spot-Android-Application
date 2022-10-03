@@ -63,7 +63,7 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/etTitle"
+                        android:id="@+id/etBillRecordTitle"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/etRecipientName"
+                        android:id="@+id/etMealBillAmount"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
                         android:textSize="20dp" />
 
                     <DatePicker
-                        android:id="@+id/dpDateOfBirth"
+                        android:id="@+id/dpMealDate"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_marginStart="16dp"
@@ -131,6 +131,33 @@
                         android:calendarViewShown="false"
                         android:datePickerMode="spinner"
                         android:spinnersShown="true" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="16dp">
+
+                        <TextView
+                            android:id="@+id/tvPaidBy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Paid By :"
+                            android:layout_marginRight="10dp"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/tvPaidByName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/mountbattenPink"
+                            android:text="OWNER"
+                            android:layout_marginRight="10dp"
+                            android:textSize="20dp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
