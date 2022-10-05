@@ -2,29 +2,66 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/bill_activity_drawer_layout"
+    android:id="@+id/debtRecordByIndividual_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BillActivity"
+    tools:context=".DebtRecordByIndividual"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/bill_activity_nav_view"
+        android:id="@+id/debtRecordByIndividual_nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         map:headerLayout="@layout/header"
-        map:menu="@menu/main_menu">
-
-    </com.google.android.material.navigation.NavigationView>
+        map:menu="@menu/main_menu"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="30dp"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvContactName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Contact Name" />
+
+            <Space
+                android:layout_width="70dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvToReceive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Receive" />
+
+            <Space
+                android:layout_width="40dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/toPay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Pay" />
+        </LinearLayout>
+
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/bill_activity_toolbar"
+            android:id="@+id/debtRecordByIndividual_toolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="#00772727"
@@ -35,10 +72,10 @@
             map:navigationIcon="@drawable/menu_icon" />
 
         <TextView
-            android:id="@+id/tvBillRecordTitle"
+            android:id="@+id/tvIndividualDebtRecord"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bill Record"
+            android:text="Individual Debt Record"
             android:textSize="18dp"
             android:textStyle="bold"
             android:layout_marginTop="12dp"
@@ -46,27 +83,18 @@
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/btnAddNewBillRecord"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add New Record"
-            map:layout_constraintBottom_toBottomOf="parent"
-            map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintStart_toStartOf="parent" />
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvBillRecord"
+            android:id="@+id/rvIndividualDebtRecord"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="80dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="55dp"
-            map:layout_constraintBottom_toTopOf="@+id/btnAddNewBillRecord"
+            android:layout_marginBottom="16dp"
+            map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toBottomOf="@+id/tvBillRecordTitle" />
+            map:layout_constraintTop_toBottomOf="@+id/tvIndividualDebtRecord" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

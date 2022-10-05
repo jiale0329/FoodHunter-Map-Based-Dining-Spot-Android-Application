@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:title="Map"
-            android:id="@+id/nav_map"
-            android:icon="@drawable/map_icon"/>
+    <item android:title="Map">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:title="Map"
+                    android:id="@+id/nav_map"
+                    android:icon="@drawable/map_icon"/>
 
-    </group>
+            </group>
+        </menu>
+    </item>
 
     <item android:title="Bill">
         <menu>
@@ -19,7 +23,7 @@
 
                 <item
                     android:title="Debt Record"
-                    android:id="@+id/nav_debt_record"
+                    android:id="@+id/nav_individual_debt_record"
                     android:icon="@drawable/logout_icon"/>
             </group>
         </menu>

@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestMap">
-        <activity android:name=".AddNewBillForm"/>
+        <activity android:name=".DebtRecordByIndividual"></activity>
+        <activity android:name=".AddNewBillForm" />
         <activity android:name=".UserLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UserRegister"/>
+        <activity android:name=".UserRegister" />
         <activity android:name=".SimilarityCalculation" />
         <activity android:name=".ChoosePicture" />
         <activity android:name=".PreviewSpinningWheelChoice" />

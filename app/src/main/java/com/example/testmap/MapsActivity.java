@@ -383,8 +383,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             case R.id.nav_map:
                 break;
             case R.id.nav_bill:
-                Intent intent = new Intent(MapsActivity.this, BillActivity.class);
-                startActivity(intent);
+                Intent intentBill = new Intent(MapsActivity.this, BillActivity.class);
+                startActivity(intentBill);
+                finish();
+                break;
+            case R.id.nav_individual_debt_record:
+                Intent intentDebt = new Intent(MapsActivity.this, DebtRecordByIndividual.class);
+                startActivity(intentDebt);
                 finish();
                 break;
             case R.id.nav_logout:

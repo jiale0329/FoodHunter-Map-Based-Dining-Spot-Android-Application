@@ -6,6 +6,7 @@ public class MealMate {
     private String contactPhoneNumber;
     private double amountToReceive;
     private double amountToPay;
+    private String ownerId;
 
     public MealMate(String contactId, String name, String phoneNumber) {
         this.contactId = contactId;
@@ -51,5 +52,13 @@ public class MealMate {
 
     public void setAmountToPay(double amountToPay) {
         this.amountToPay = amountToPay;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
     }
 }

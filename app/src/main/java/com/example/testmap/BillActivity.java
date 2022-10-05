@@ -84,8 +84,6 @@ public class BillActivity extends AppCompatActivity {
             }
         }, 3000);
 
-        setSupportActionBar(toolbar);
-
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
@@ -129,11 +127,16 @@ public class BillActivity extends AppCompatActivity {
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.nav_map:
-                Intent intent = new Intent(BillActivity.this, MapsActivity.class);
-                startActivity(intent);
+                Intent intentMap = new Intent(BillActivity.this, MapsActivity.class);
+                startActivity(intentMap);
                 finish();
                 break;
             case R.id.nav_bill:
+                break;
+            case R.id.nav_individual_debt_record:
+                Intent intentDebt = new Intent(BillActivity.this, DebtRecordByIndividual.class);
+                startActivity(intentDebt);
+                finish();
                 break;
             case R.id.nav_logout:
                 SharedPreferences myPreferences = getSharedPreferences("myPreferences", MODE_PRIVATE);
