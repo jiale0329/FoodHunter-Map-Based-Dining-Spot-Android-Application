@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestMap">
-        <activity android:name=".DebtRecordByIndividual"></activity>
+        <activity android:name=".ViewRestaurantProfile"/>
+        <activity android:name=".DebtRecordByIndividual" />
         <activity android:name=".AddNewBillForm" />
         <activity android:name=".UserLogin">
             <intent-filter>

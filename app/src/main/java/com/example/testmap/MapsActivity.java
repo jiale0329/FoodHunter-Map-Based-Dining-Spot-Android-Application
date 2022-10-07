@@ -98,6 +98,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     SqliteHelper sql;
     Button mBtnSpinningWheel, mBtnNavigateToChoosePicture;
 
+    public static final String EXTRA_RESTAURANT_ID = "restaurant_id";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -252,7 +254,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         }, 3000);
 
-
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
@@ -299,6 +300,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 TextView mtvPopupAddress = (TextView) popupView.findViewById(R.id.tvPopUpAddress);
                 mIvPopupPicture = (ImageView) popupView.findViewById(R.id.ivPopupPicture);
                 Button mBtnPopUpAddToSpinningWheel = popupView.findViewById(R.id.btnPopUpAddToSpinningWheel);
+                Button mBtnPopUpViewRestaurantProfile = popupView.findViewById(R.id.btnPopUpViewDetails);
 
                 for (DiningSpot diningSpot : mDiningSpot)
                 {
@@ -350,6 +352,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 sql.insertFoodChoice(MapsActivity.this, diningSpot.getmId(), diningSpot.getmName());
                             }
                         }
+                    }
+                });
+
+                mBtnPopUpViewRestaurantProfile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent i = new Intent(MapsActivity.this, ViewRestaurantProfile.class);
+                        i.putExtra(EXTRA_RESTAURANT_ID, marker.getTitle());
+
+                        startActivity(i);
                     }
                 });
 
