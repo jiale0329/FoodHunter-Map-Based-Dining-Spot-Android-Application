@@ -15,21 +15,24 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DebtRecordByIndividual extends AppCompatActivity {
+public class ViewRatedRestaurant extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    RecyclerView mRvRatedRestaurant;
+    RatedDiningSpotAdapter adapter;
     String userId;
-    RecyclerView mRvDebtRecord;
-    MealMateDebtRecordAdapter adapter;
-    private List<MealMate> mMealMate = new ArrayList<>();
+    UserRating mOwnerRating;
+    private List<DiningSpot> mDiningSpot = new ArrayList<>();
 
     public static SharedPreferences mPreferences;
     private final String SHARED_PREF = "myPreferences";
@@ -38,15 +41,15 @@ public class DebtRecordByIndividual extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_debt_record_by_individual);
+        setContentView(R.layout.activity_view_rated_restaurant);
 
         mPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
         userId = mPreferences.getString(KEY_USER_ID, "");
 
-        drawerLayout = findViewById(R.id.debtRecordByIndividual_drawer_layout);
-        navigationView = findViewById(R.id.debtRecordByIndividual_nav_view);
-        toolbar = findViewById(R.id.debtRecordByIndividual_toolbar);
-        mRvDebtRecord = findViewById(R.id.rvIndividualDebtRecord);
+        drawerLayout = findViewById(R.id.viewRatedRestaurant_drawer_layout);
+        navigationView = findViewById(R.id.viewRatedRestaurant_nav_view);
+        toolbar = findViewById(R.id.viewRatedRestaurant_toolbar);
+        mRvRatedRestaurant = findViewById(R.id.rvRatedRestaurant);
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -54,20 +57,22 @@ public class DebtRecordByIndividual extends AppCompatActivity {
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this::onNavigationItemSelected);
+        navigationView.setCheckedItem(R.id.nav_restaurant_rated);
 
-        navigationView.setCheckedItem(R.id.nav_individual_debt_record);
+        mOwnerRating = new UserRating(userId);
+        mOwnerRating.initiateRestaurantRatingGiven();
 
-        MealMateLab mealMateLab = MealMateLab.get(DebtRecordByIndividual.this, userId);
-        mMealMate = mealMateLab.getMealMates();
+        DiningSpotLab diningSpotLab = DiningSpotLab.get(ViewRatedRestaurant.this);
+        mDiningSpot = diningSpotLab.getDiningSpots();
 
-        ProgressDialog dialog = ProgressDialog.show(DebtRecordByIndividual.this, "",
+        ProgressDialog dialog = ProgressDialog.show(ViewRatedRestaurant.this, "",
                 "Loading......", true);
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                mRvDebtRecord.setLayoutManager(new LinearLayoutManager(DebtRecordByIndividual.this));
-                adapter = new MealMateDebtRecordAdapter(mMealMate, DebtRecordByIndividual.this);
-                mRvDebtRecord.setAdapter(adapter);
+                mRvRatedRestaurant.setLayoutManager(new LinearLayoutManager(ViewRatedRestaurant.this));
+                adapter = new RatedDiningSpotAdapter(mOwnerRating.getmRestaurantRatingGiven(),mDiningSpot, ViewRatedRestaurant.this);
+                mRvRatedRestaurant.setAdapter(adapter);
                 dialog.dismiss();
             }
         }, 3000);
@@ -76,24 +81,24 @@ public class DebtRecordByIndividual extends AppCompatActivity {
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.nav_map:
-                Intent intentMap = new Intent(DebtRecordByIndividual.this, MapsActivity.class);
+                Intent intentMap = new Intent(ViewRatedRestaurant.this, MapsActivity.class);
                 startActivity(intentMap);
                 finish();
                 break;
             case R.id.nav_restaurant_rated:
-                Intent intentRestaurantRated = new Intent(DebtRecordByIndividual.this, ViewRatedRestaurant.class);
-                startActivity(intentRestaurantRated);
-                finish();
                 break;
             case R.id.nav_bill:
-                Intent intentBill = new Intent(DebtRecordByIndividual.this, BillActivity.class);
+                Intent intentBill = new Intent(ViewRatedRestaurant.this, BillActivity.class);
                 startActivity(intentBill);
                 finish();
                 break;
             case R.id.nav_individual_debt_record:
+                Intent intentDebt = new Intent(ViewRatedRestaurant.this, DebtRecordByIndividual.class);
+                startActivity(intentDebt);
+                finish();
                 break;
             case R.id.nav_recommend_dining_spot:
-                Intent intentRecommend = new Intent(DebtRecordByIndividual.this, RecommendDiningSpot.class);
+                Intent intentRecommend = new Intent(ViewRatedRestaurant.this, RecommendDiningSpot.class);
                 startActivity(intentRecommend);
                 finish();
                 break;
@@ -102,7 +107,7 @@ public class DebtRecordByIndividual extends AppCompatActivity {
                 SharedPreferences.Editor spEditor = UserLogin.mPreferences.edit();
                 spEditor.clear();
                 spEditor.apply();
-                Intent q = new Intent(DebtRecordByIndividual.this, UserLogin.class);
+                Intent q = new Intent(ViewRatedRestaurant.this, UserLogin.class);
                 startActivity(q);
                 finish();
                 break;

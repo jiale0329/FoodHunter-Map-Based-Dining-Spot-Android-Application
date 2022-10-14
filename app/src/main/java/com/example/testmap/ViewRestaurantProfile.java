@@ -42,7 +42,7 @@ import java.util.Map;
 public class ViewRestaurantProfile extends AppCompatActivity {
 
     ImageView mIvRestaurantPicture;
-    TextView mTvRestaurantName, mTvRestaurantAddress;
+    TextView mTvRestaurantName, mTvRestaurantAddress, mTvRestaurantRating;
     String imageId, userId, restaurantId;
     StorageReference storageReference;
     Button mBtnRateRestaurantPopUp;
@@ -66,6 +66,7 @@ public class ViewRestaurantProfile extends AppCompatActivity {
         mTvRestaurantName = findViewById(R.id.tvRestaurantNameContent);
         mTvRestaurantAddress = findViewById(R.id.tvAddressContent);
         mBtnRateRestaurantPopUp = findViewById(R.id.btnRateRestaurantPopUp);
+        mTvRestaurantRating = findViewById(R.id.tvRestaurantRatingContent);
 
         mPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
         userId = mPreferences.getString(KEY_USER_ID, "");
@@ -82,6 +83,7 @@ public class ViewRestaurantProfile extends AppCompatActivity {
                     if (restaurantId.equals(diningSpot.getmId())){
                         mTvRestaurantName.setText(diningSpot.getmName());
                         mTvRestaurantAddress.setText(diningSpot.getmAddress());
+                        mTvRestaurantRating.setText("" + diningSpot.getmRating());
                         imageId = diningSpot.getmPictureUrl();
 
                         storageReference = FirebaseStorage.getInstance().getReference();
@@ -112,7 +114,7 @@ public class ViewRestaurantProfile extends AppCompatActivity {
                 }
                 dialog.dismiss();
             }
-        }, 3000);
+        }, 5000);
 
         mBtnRateRestaurantPopUp.setOnClickListener(new View.OnClickListener() {
             @Override

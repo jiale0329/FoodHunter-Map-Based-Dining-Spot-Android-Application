@@ -14,31 +14,60 @@
         app:srcCompat="@android:drawable/ic_menu_report_image" />
 
     <LinearLayout
-        android:id="@+id/linearLayout1"
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivRestaurantPicture">
+        app:layout_constraintTop_toBottomOf="@+id/ivRestaurantPicture">>
 
-        <TextView
-            android:id="@+id/tvRestaurantNameTitle"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Restaurant Name" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvRestaurantNameContent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="NameContent"
-            android:textColor="@color/black"
-            android:textSize="17dp" />
+            <TextView
+                android:id="@+id/tvRestaurantNameTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Restaurant Name" />
 
+            <TextView
+                android:id="@+id/tvRestaurantNameContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NameContent"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_weight="1"
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvRestaurantRatingTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rating" />
+
+            <TextView
+                android:id="@+id/tvRestaurantRatingContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="RatingContent"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -51,7 +80,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <TextView
             android:id="@+id/tvAddressTitle"
@@ -84,7 +113,7 @@
             android:id="@+id/tvRatingTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ratings and Review!" />
+            android:text="Ratings and Review" />
 
 <!--        <RatingBar-->
 <!--            android:id="@+id/ratingBar"-->

@@ -1,11 +1,14 @@
 package com.example.testmap;
 
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.util.Log;
+import android.os.Handler;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -14,7 +17,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public class DiningSpotLab {
@@ -49,14 +51,53 @@ public class DiningSpotLab {
                                     diningSpot.setmLongitude(document.get("longitude").toString());
                                     diningSpot.setmAddress(document.get("address").toString());
                                     diningSpot.setmPictureUrl(document.get("pictureUrl").toString());
+                                    diningSpot.setmRestaurantRating(searchRating(document.getId(), context));
+
+                                    ProgressDialog dialog = ProgressDialog.show(context, "",
+                                            "Loading......", true);
+                                    Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        public void run() {
+                                            diningSpot.calculateRating();
+                                            dialog.dismiss();
+                                        }
+                                    }, 3000);
+
                                     mDiningSpot.add(diningSpot);
-                                    //Toast.makeText(MainActivity.this, document.get("name").toString(), Toast.LENGTH_SHORT).show();
-//                            set.add(document.getId().toString());
                                 }
                             }
                         }
                     }
                 });
+    }
+
+    private List<RestaurantRating> searchRating(String id, Context context) {
+        List<RestaurantRating> mRestaurantRatings = new ArrayList<>();
+        db.collection("restaurantRating")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot result = task.getResult();
+
+                            if(!result.isEmpty()){
+                                for (QueryDocumentSnapshot document : result) {
+                                    if (document.get("diningSpotId").toString().equals(id)){
+                                        double rating = document.getDouble("rating");
+                                        RestaurantRating restaurantRating = new RestaurantRating(document.getId()
+                                                , document.get("userId").toString()
+                                                , document.get("diningSpotId").toString()
+                                                , (int)rating);
+                                        mRestaurantRatings.add(restaurantRating);
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                });
+        return mRestaurantRatings;
     }
 
     public List<DiningSpot> getDiningSpots(){

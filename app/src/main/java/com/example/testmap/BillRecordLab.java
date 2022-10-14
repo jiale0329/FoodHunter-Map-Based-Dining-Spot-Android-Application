@@ -22,13 +22,13 @@ public class BillRecordLab {
     private List<BillRecord> mBillRecord;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public static BillRecordLab get(Context context){
+    public static BillRecordLab get(Context context, String userId){
 
-        sBillRecordLab = new BillRecordLab(context);
+        sBillRecordLab = new BillRecordLab(context, userId);
         return sBillRecordLab;
     }
 
-    private BillRecordLab(Context context) {
+    private BillRecordLab(Context context, String userId) {
         mBillRecord = new ArrayList<>();
         mBillRecord.clear();
 
@@ -42,14 +42,16 @@ public class BillRecordLab {
 
                             if(!result.isEmpty()){
                                 for (QueryDocumentSnapshot document : result) {
-                                    BillRecord billRecord = new BillRecord(document.getId()
-                                            , document.get("billRecordTitle").toString()
-                                            , document.getDouble("totalAmount")
-                                            , document.get("mealDate").toString()
-                                            , document.get("paidById").toString()
-                                            , document.get("mealParticipants").toString()
-                                            , document.get("ownerId").toString());
-                                    mBillRecord.add(billRecord);
+                                    if (document.get("ownerId").toString().equals(userId)){
+                                        BillRecord billRecord = new BillRecord(document.getId()
+                                                , document.get("billRecordTitle").toString()
+                                                , document.getDouble("totalAmount")
+                                                , document.get("mealDate").toString()
+                                                , document.get("paidById").toString()
+                                                , document.get("mealParticipants").toString()
+                                                , document.get("ownerId").toString());
+                                        mBillRecord.add(billRecord);
+                                    }
                                 }
                             }
                         }
@@ -62,9 +64,9 @@ public class BillRecordLab {
     }
 
     public BillRecord getBillRecord(UUID id){
-        for (BillRecord BillRecord : mBillRecord){
-            if (BillRecord.getBillRecordId().equals(id)){
-                return BillRecord;
+        for (BillRecord billRecord : mBillRecord){
+            if (billRecord.getBillRecordId().equals(id)){
+                return billRecord;
             }
         }
         return null;

@@ -22,13 +22,13 @@ public class MealMateLab {
     private List<MealMate> mMealMate;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public static MealMateLab get(Context context){
+    public static MealMateLab get(Context context, String userId){
 
-        sMealMateLab = new MealMateLab(context);
+        sMealMateLab = new MealMateLab(context, userId);
         return sMealMateLab;
     }
 
-    private MealMateLab(Context context) {
+    private MealMateLab(Context context, String userId) {
         mMealMate = new ArrayList<>();
         mMealMate.clear();
 
@@ -42,13 +42,15 @@ public class MealMateLab {
 
                             if(!result.isEmpty()){
                                 for (QueryDocumentSnapshot document : result) {
-                                    MealMate mealMate = new MealMate(document.getId()
-                                            , document.get("contactName").toString()
-                                            , document.get("contactPhoneNumber").toString());
-                                    mealMate.setAmountToPay(document.getDouble("amountToPay"));
-                                    mealMate.setAmountToReceive(document.getDouble("amountToReceive"));
-                                    mealMate.setOwnerId(document.get("ownerId").toString());
-                                    mMealMate.add(mealMate);
+                                    if (document.get("ownerId").toString().equals(userId)){
+                                        MealMate mealMate = new MealMate(document.getId()
+                                                , document.get("contactName").toString()
+                                                , document.get("contactPhoneNumber").toString());
+                                        mealMate.setAmountToPay(document.getDouble("amountToPay"));
+                                        mealMate.setAmountToReceive(document.getDouble("amountToReceive"));
+                                        mealMate.setOwnerId(document.get("ownerId").toString());
+                                        mMealMate.add(mealMate);
+                                    }
                                 }
                             }
                         }

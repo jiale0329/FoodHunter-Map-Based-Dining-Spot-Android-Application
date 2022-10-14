@@ -358,10 +358,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mBtnPopUpViewRestaurantProfile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                         Intent i = new Intent(MapsActivity.this, ViewRestaurantProfile.class);
                         i.putExtra(EXTRA_RESTAURANT_ID, marker.getTitle());
-
                         startActivity(i);
                     }
                 });
@@ -395,6 +393,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         switch (item.getItemId()){
             case R.id.nav_map:
                 break;
+            case R.id.nav_restaurant_rated:
+                Intent intentRestaurantRated = new Intent(MapsActivity.this, ViewRatedRestaurant.class);
+                startActivity(intentRestaurantRated);
+                finish();
+                break;
             case R.id.nav_bill:
                 Intent intentBill = new Intent(MapsActivity.this, BillActivity.class);
                 startActivity(intentBill);
@@ -403,6 +406,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             case R.id.nav_individual_debt_record:
                 Intent intentDebt = new Intent(MapsActivity.this, DebtRecordByIndividual.class);
                 startActivity(intentDebt);
+                finish();
+                break;
+            case R.id.nav_recommend_dining_spot:
+                Intent intentRecommend = new Intent(MapsActivity.this, RecommendDiningSpot.class);
+                startActivity(intentRecommend);
                 finish();
                 break;
             case R.id.nav_logout:

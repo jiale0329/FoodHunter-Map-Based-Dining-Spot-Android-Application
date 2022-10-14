@@ -9,6 +9,15 @@
                     android:id="@+id/nav_map"
                     android:icon="@drawable/map_icon"/>
 
+                <item
+                    android:title="Restaurant Rated"
+                    android:id="@+id/nav_restaurant_rated"
+                    android:icon="@drawable/map_icon"/>
+
+                <item
+                    android:title="Recommended Restaurant"
+                    android:id="@+id/nav_recommend_dining_spot"
+                    android:icon="@drawable/map_icon"/>
             </group>
         </menu>
     </item>

@@ -54,14 +54,22 @@ public class BillActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    String userId;
     RecyclerView mRvBillRecord;
     private List<BillRecord> mBillRecord = new ArrayList<>();
     BillRecordAdapter adapter;
+
+    public static SharedPreferences mPreferences;
+    private final String SHARED_PREF = "myPreferences";
+    private final String KEY_USER_ID = "userId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bill);
+
+        mPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
+        userId = mPreferences.getString(KEY_USER_ID, "");
 
         mRvBillRecord = findViewById(R.id.rvBillRecord);
         mBtnAddNewBillRecord = findViewById(R.id.btnAddNewBillRecord);
@@ -69,7 +77,7 @@ public class BillActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.bill_activity_nav_view);
         toolbar = findViewById(R.id.bill_activity_toolbar);
 
-        BillRecordLab billRecordLab = BillRecordLab.get(BillActivity.this);
+        BillRecordLab billRecordLab = BillRecordLab.get(BillActivity.this, userId);
         mBillRecord = billRecordLab.getBillRecords();
 
         ProgressDialog dialog = ProgressDialog.show(BillActivity.this, "",
@@ -131,11 +139,21 @@ public class BillActivity extends AppCompatActivity {
                 startActivity(intentMap);
                 finish();
                 break;
+            case R.id.nav_restaurant_rated:
+                Intent intentRestaurantRated = new Intent(BillActivity.this, ViewRatedRestaurant.class);
+                startActivity(intentRestaurantRated);
+                finish();
+                break;
             case R.id.nav_bill:
                 break;
             case R.id.nav_individual_debt_record:
                 Intent intentDebt = new Intent(BillActivity.this, DebtRecordByIndividual.class);
                 startActivity(intentDebt);
+                finish();
+                break;
+            case R.id.nav_recommend_dining_spot:
+                Intent intentRecommend = new Intent(BillActivity.this, RecommendDiningSpot.class);
+                startActivity(intentRecommend);
                 finish();
                 break;
             case R.id.nav_logout:
