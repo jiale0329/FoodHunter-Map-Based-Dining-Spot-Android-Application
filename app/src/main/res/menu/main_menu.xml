@@ -12,12 +12,12 @@
                 <item
                     android:title="Restaurant Rated"
                     android:id="@+id/nav_restaurant_rated"
-                    android:icon="@drawable/map_icon"/>
+                    android:icon="@drawable/ic_rated"/>
 
                 <item
                     android:title="Recommended Restaurant"
                     android:id="@+id/nav_recommend_dining_spot"
-                    android:icon="@drawable/map_icon"/>
+                    android:icon="@drawable/ic_restaurant"/>
             </group>
         </menu>
     </item>

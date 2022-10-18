@@ -26,6 +26,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FileDownloadTask;
@@ -42,12 +43,16 @@ import java.util.Map;
 public class ViewRestaurantProfile extends AppCompatActivity {
 
     ImageView mIvRestaurantPicture;
-    TextView mTvRestaurantName, mTvRestaurantAddress, mTvRestaurantRating;
+    TextView mTvRestaurantName, mTvRestaurantAddress, mTvRestaurantRating, mTvRatingSize;
     String imageId, userId, restaurantId;
     StorageReference storageReference;
     Button mBtnRateRestaurantPopUp;
     FirebaseFirestore database = FirebaseFirestore.getInstance();
     private List<DiningSpot> mDiningSpot = new ArrayList<>();
+    LinearProgressIndicator mLpiFiveStar, mLpiFourStar, mLpiThreeStar, mLpiTwoStar, mLpiOneStar;
+    int fiveStar = 0, fourStar = 0, threeStar = 0, twoStar = 0, oneStar = 0;
+    RatingBar mRbRating;
+    Boolean rated = false;
 
     public static final String EXTRA_RESTAURANT_ID = "restaurant_id";
     public static SharedPreferences mPreferences;
@@ -67,6 +72,13 @@ public class ViewRestaurantProfile extends AppCompatActivity {
         mTvRestaurantAddress = findViewById(R.id.tvAddressContent);
         mBtnRateRestaurantPopUp = findViewById(R.id.btnRateRestaurantPopUp);
         mTvRestaurantRating = findViewById(R.id.tvRestaurantRatingContent);
+        mLpiFiveStar = findViewById(R.id.lpiFiveStar);
+        mLpiFourStar = findViewById(R.id.lpiFourStar);
+        mLpiThreeStar = findViewById(R.id.lpiThreeStar);
+        mLpiTwoStar = findViewById(R.id.lpiTwoStar);
+        mLpiOneStar = findViewById(R.id.lpiOneStar);
+        mRbRating = findViewById(R.id.rbRating);
+        mTvRatingSize = findViewById(R.id.tvRatingSize);
 
         mPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
         userId = mPreferences.getString(KEY_USER_ID, "");
@@ -83,7 +95,12 @@ public class ViewRestaurantProfile extends AppCompatActivity {
                     if (restaurantId.equals(diningSpot.getmId())){
                         mTvRestaurantName.setText(diningSpot.getmName());
                         mTvRestaurantAddress.setText(diningSpot.getmAddress());
-                        mTvRestaurantRating.setText("" + diningSpot.getmRating());
+
+                        int scale = (int) Math.pow(10, 1);
+                        double rating = (double) Math.round(diningSpot.getmRating() * scale) / scale;
+
+                        mTvRestaurantRating.setText("" + rating);
+                        mRbRating.setRating((float)diningSpot.getmRating());
                         imageId = diningSpot.getmPictureUrl();
 
                         storageReference = FirebaseStorage.getInstance().getReference();
@@ -109,6 +126,62 @@ public class ViewRestaurantProfile extends AppCompatActivity {
                             });
                         } catch (IOException e) {
                             e.printStackTrace();
+                        }
+
+                        for (RestaurantRating restaurantRating : diningSpot.getmRestaurantRating()){
+                            switch (restaurantRating.getRating()){
+                                case 1:
+                                    oneStar++;
+                                    break;
+                                case 2:
+                                    twoStar++;
+                                    break;
+                                case 3:
+                                    threeStar++;
+                                    break;
+                                case 4:
+                                    fourStar++;
+                                    break;
+                                case 5:
+                                    fiveStar++;
+                                    break;
+                            }
+
+                            if (restaurantRating.getDiningSpotId().equals(restaurantId) && restaurantRating.getUserId().equals(userId)){
+                                rated = true;
+                            }
+                        }
+
+                        double size = (double) diningSpot.getmRestaurantRating().size();
+
+                        mTvRatingSize.setText("" + (int)size);
+
+                        double calculate;
+                        int rounded;
+
+                        calculate = (fiveStar/size)*100;
+                        rounded = (int) calculate;
+                        mLpiFiveStar.setProgressCompat(rounded, true);
+
+                        calculate = (fourStar/size)*100;
+                        rounded = (int) calculate;
+                        mLpiFourStar.setProgressCompat(rounded, true);
+
+                        calculate = (threeStar/size)*100;
+                        rounded = (int) calculate;
+                        mLpiThreeStar.setProgressCompat(rounded, true);
+
+                        calculate = (twoStar/size)*100;
+                        rounded = (int) calculate;
+                        mLpiTwoStar.setProgressCompat(rounded, true);
+
+                        calculate = (oneStar/size)*100;
+                        rounded = (int) calculate;
+                        mLpiOneStar.setProgressCompat(rounded, true);
+
+                        if (rated){
+                            mBtnRateRestaurantPopUp.setEnabled(false);
+                            mBtnRateRestaurantPopUp.setVisibility(View.INVISIBLE);
                         }
                     }
                 }

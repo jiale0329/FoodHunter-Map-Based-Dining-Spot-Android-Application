@@ -48,28 +48,32 @@
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_add"
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toEndOf="parent" />
 
-        <Button
-            android:id="@+id/btnNavigateToSpinningWheel"
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabSpinningWheel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="Spin Your Choice"
+            android:layout_marginBottom="80dp"
             map:layout_constraintBottom_toBottomOf="parent"
-            map:layout_constraintStart_toStartOf="parent" />
+            map:layout_constraintEnd_toEndOf="parent"
+            map:icon="@drawable/ic_spinning_wheel"
+            android:text="Spin Your Choice"
+            android:visibility="invisible"/>
 
-        <Button
-            android:id="@+id/btnNavigateToChoosePicture"
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabSearchWithPicture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:text="Search with Picture"
-            map:layout_constraintBottom_toTopOf="@+id/btnNavigateToSpinningWheel"
-            map:layout_constraintStart_toStartOf="parent" />
+            android:layout_marginBottom="135dp"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:icon="@drawable/ic_camera"
+            android:text="Search With Picture"
+            android:visibility="invisible"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

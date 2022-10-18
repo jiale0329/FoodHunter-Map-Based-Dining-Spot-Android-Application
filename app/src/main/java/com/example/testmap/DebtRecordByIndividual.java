@@ -15,8 +15,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +37,7 @@ public class DebtRecordByIndividual extends AppCompatActivity {
     RecyclerView mRvDebtRecord;
     MealMateDebtRecordAdapter adapter;
     private List<MealMate> mMealMate = new ArrayList<>();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public static SharedPreferences mPreferences;
     private final String SHARED_PREF = "myPreferences";
@@ -47,6 +55,29 @@ public class DebtRecordByIndividual extends AppCompatActivity {
         navigationView = findViewById(R.id.debtRecordByIndividual_nav_view);
         toolbar = findViewById(R.id.debtRecordByIndividual_toolbar);
         mRvDebtRecord = findViewById(R.id.rvIndividualDebtRecord);
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView mTvHeaderProfileName = (TextView) headerView.findViewById(R.id.tvHeaderProfileName);
+
+        db.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot result = task.getResult();
+
+                            if(!result.isEmpty()){
+                                for (QueryDocumentSnapshot document : result) {
+
+                                    if (document.getId().equals(userId)){
+                                        mTvHeaderProfileName.setText(document.get("fullName").toString());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

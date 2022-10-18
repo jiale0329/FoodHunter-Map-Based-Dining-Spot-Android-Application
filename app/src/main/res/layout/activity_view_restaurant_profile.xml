@@ -43,31 +43,8 @@
                 android:text="NameContent"
                 android:textColor="@color/black"
                 android:textSize="17dp" />
-
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout5"
-            android:layout_weight="1"
-            android:layout_width="3dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvRestaurantRatingTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Rating" />
-
-            <TextView
-                android:id="@+id/tvRestaurantRatingContent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="RatingContent"
-                android:textColor="@color/black"
-                android:textSize="17dp" />
-
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -113,15 +90,191 @@
             android:id="@+id/tvRatingTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ratings and Review" />
+            android:text="Ratings" />
+    </LinearLayout>
 
-<!--        <RatingBar-->
-<!--            android:id="@+id/ratingBar"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:numStars="5"-->
-<!--            android:stepSize="1"/>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvRestaurantRatingContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="0.0"
+                android:textColor="@color/black"
+                android:textSize="30dp" />
+
+            <RatingBar
+                android:id="@+id/rbRating"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:numStars="5"
+                android:stepSize="0.1"/>
+
+            <TextView
+                android:id="@+id/tvRatingSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="3dp"
+                android:text="1"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvFiveStar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginLeft="25dp"
+                    android:text="5" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/lpiFiveStar"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    app:indicatorColor="@color/mountbattenPink"
+                    app:trackCornerRadius="10dp"
+                    app:trackThickness="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvFourStar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:gravity="center"
+                    android:text="4" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/lpiFourStar"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    app:indicatorColor="@color/mountbattenPink"
+                    app:trackCornerRadius="10dp"
+                    app:trackThickness="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvThreeStar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:gravity="center"
+                    android:text="3" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/lpiThreeStar"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    app:indicatorColor="@color/mountbattenPink"
+                    app:trackCornerRadius="10dp"
+                    app:trackThickness="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvTwoStar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:gravity="center"
+                    android:text="2" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/lpiTwoStar"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    app:indicatorColor="@color/mountbattenPink"
+                    app:trackCornerRadius="10dp"
+                    app:trackThickness="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvOneStar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:gravity="center"
+                    android:text="4" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/lpiOneStar"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    app:indicatorColor="@color/mountbattenPink"
+                    app:trackCornerRadius="10dp"
+                    app:trackThickness="10dp" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <Button

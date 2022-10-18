@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -37,12 +38,12 @@ import java.util.List;
 
 public class SimilarityCalculationAdapter extends RecyclerView.Adapter<SimilarityCalculationAdapter.SimilarityCalculationHolder> {
 
-    private List<DiningSpot> mDiningSpot;
+    private List<DiningSpot> mDiningSpotList;
     private Context context;
     private Uri mImage;
 
     public SimilarityCalculationAdapter(List<DiningSpot>diningSpot, Uri image, Context c){
-        mDiningSpot = diningSpot;
+        mDiningSpotList = diningSpot;
         mImage = image;
         context = c;
     }
@@ -60,9 +61,10 @@ public class SimilarityCalculationAdapter extends RecyclerView.Adapter<Similarit
 
     @Override
     public void onBindViewHolder(@NonNull SimilarityCalculationHolder holder, int position) {
-        DiningSpot diningSpot = mDiningSpot.get(position);
+        DiningSpot diningSpot = mDiningSpotList.get(position);
+
         try {
-            holder.bindDiningSpot(diningSpot);
+            holder.bindDiningSpot(diningSpot, position, holder.itemView);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,12 +73,12 @@ public class SimilarityCalculationAdapter extends RecyclerView.Adapter<Similarit
     }
 
     @Override
-    public int getItemCount() { return mDiningSpot.size();}
+    public int getItemCount() { return mDiningSpotList.size();}
 
     public class SimilarityCalculationHolder extends RecyclerView.ViewHolder{
 
         public TextView mTvDiningSpotName, mTvSimilarityCalculation;
-        private DiningSpot mDiningSpot;
+        private DiningSpot mDiningSpot, temp;
         private Bitmap bmpSelected, bmpRetrieved;
         private Mat srcSelected, srcRetrieved;
         StorageReference storageReference;
@@ -88,7 +90,7 @@ public class SimilarityCalculationAdapter extends RecyclerView.Adapter<Similarit
             mTvSimilarityCalculation = itemView.findViewById(R.id.list_item_similarity_calculation);
         }
 
-        public void bindDiningSpot(DiningSpot diningSpot) throws IOException {
+        public void bindDiningSpot(DiningSpot diningSpot, int position, View itemView) throws IOException {
             mDiningSpot = diningSpot;
             mTvDiningSpotName.setText(mDiningSpot.getmName());
 
@@ -105,7 +107,6 @@ public class SimilarityCalculationAdapter extends RecyclerView.Adapter<Similarit
                             @Override
                             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                                 bmpRetrieved = BitmapFactory.decodeFile(localfile.getAbsolutePath());
-                                Toast.makeText(context, "Retrieve Successful", Toast.LENGTH_SHORT).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -122,13 +123,13 @@ public class SimilarityCalculationAdapter extends RecyclerView.Adapter<Similarit
             srcSelected = new Mat(bmp.getHeight(), bmp.getWidth(), CvType.CV_8UC2);
             Utils.bitmapToMat(bmp, srcSelected);
 
-            ProgressDialog dialog = ProgressDialog.show(context, "",
-                    "Loading. Please wait...", true);   //show loading dialog
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    dialog.dismiss();   //remove loading Dialog
+            new CountDownTimer(5000, 1000) {
 
+                public void onTick(long millisUntilFinished) {
+                    // You don't need anything here
+                }
+
+                public void onFinish() {
                     Bitmap bmp2 = bmpRetrieved.copy(Bitmap.Config.ARGB_8888, true);
                     srcRetrieved = new Mat(bmp.getHeight(), bmp.getWidth(), CvType.CV_8UC2);
                     Utils.bitmapToMat(bmp2, srcRetrieved);
@@ -150,10 +151,16 @@ public class SimilarityCalculationAdapter extends RecyclerView.Adapter<Similarit
 
                     double res = Imgproc.compareHist(histBase, histTest1, Imgproc.CV_COMP_CORREL);
                     String z = "" + res*100 + "%";
-                    Toast.makeText(context, "" + res*100 + "%", Toast.LENGTH_SHORT).show();
                     mTvSimilarityCalculation.setText(z);
+
+                    if ((res*100) > 95){
+                        temp = diningSpot;
+                        mDiningSpotList.clear();
+                        mDiningSpotList.add(diningSpot);
+                        notifyDataSetChanged();
+                    }
                 }
-            }, 5000);
+            }.start();
         }
     }
 }

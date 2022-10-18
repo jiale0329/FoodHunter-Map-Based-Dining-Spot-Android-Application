@@ -35,6 +35,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -56,6 +58,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -79,13 +82,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener {
 
     private GoogleMap mMap;
     boolean isPermissionGranted;
     SupportMapFragment mapFragment;
     FloatingActionButton fab;
+    ExtendedFloatingActionButton mFabSpinningWheel, mFabSearchWithPicture;
+    Animation fabOpen, fabClose, rotateForward, rotateBackward;
     private FusedLocationProviderClient mClient;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private List<DiningSpot> mDiningSpot = new ArrayList<>();
@@ -96,9 +100,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     String imageId;
     ImageView mIvPopupPicture;
     SqliteHelper sql;
-    Button mBtnSpinningWheel, mBtnNavigateToChoosePicture;
+    String userId;
+    Boolean isOpen = false;
 
     public static final String EXTRA_RESTAURANT_ID = "restaurant_id";
+    public static SharedPreferences mPreferences;
+    private final String SHARED_PREF = "myPreferences";
+    private final String KEY_USER_ID = "userId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,11 +116,36 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         DiningSpotLab diningSpotLab = DiningSpotLab.get(MapsActivity.this);
         mDiningSpot = diningSpotLab.getDiningSpots();
 
+        mPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
+        userId = mPreferences.getString(KEY_USER_ID, "");
+
         drawerLayout = findViewById(R.id.map_activity_drawer_layout);
         navigationView = findViewById(R.id.map_activity_nav_view);
         toolbar = findViewById(R.id.map_activity_toolbar);
-        mBtnSpinningWheel = findViewById(R.id.btnNavigateToSpinningWheel);
-        mBtnNavigateToChoosePicture = findViewById(R.id.btnNavigateToChoosePicture);
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView mTvHeaderProfileName = (TextView) headerView.findViewById(R.id.tvHeaderProfileName);
+
+        db.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot result = task.getResult();
+
+                            if(!result.isEmpty()){
+                                for (QueryDocumentSnapshot document : result) {
+
+                                    if (document.getId().equals(userId)){
+                                        mTvHeaderProfileName.setText(document.get("fullName").toString());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
 
         sql = new SqliteHelper(MapsActivity.this);
 
@@ -128,6 +161,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         navigationView.setCheckedItem(R.id.nav_map);
 
         fab = findViewById(R.id.fab);
+        mFabSpinningWheel = findViewById(R.id.fabSpinningWheel);
+        mFabSearchWithPicture = findViewById(R.id.fabSearchWithPicture);
+
+        fabOpen = AnimationUtils.loadAnimation(this, R.anim.fab_open);
+        fabClose = AnimationUtils.loadAnimation(this, R.anim.fab_close);
+
+        rotateForward = AnimationUtils.loadAnimation(this, R.anim.rotate_forward);
+        rotateBackward = AnimationUtils.loadAnimation(this, R.anim.rotate_backward);
 
         checkMyPermission();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -139,25 +180,47 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getCurrLoc();
+                animateFab();
+//                getCurrLoc();
             }
         });
 
-        mBtnSpinningWheel.setOnClickListener(new View.OnClickListener() {
+        mFabSpinningWheel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animateFab();
                 Intent intent = new Intent(MapsActivity.this, PreviewSpinningWheelChoice.class);
                 startActivity(intent);
             }
         });
 
-        mBtnNavigateToChoosePicture.setOnClickListener(new View.OnClickListener() {
+        mFabSearchWithPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                animateFab();
                 Intent intent = new Intent(MapsActivity.this, ChoosePicture.class);
                 startActivity(intent);
             }
         });
+    }
+
+    private void animateFab() {
+        if (isOpen){
+            fab.startAnimation(rotateForward);
+            mFabSpinningWheel.startAnimation(fabClose);
+            mFabSearchWithPicture.startAnimation(fabClose);
+            mFabSpinningWheel.setClickable(false);
+            mFabSearchWithPicture.setClickable(false);
+            isOpen = false;
+        }
+        else{
+            fab.startAnimation(rotateBackward);
+            mFabSpinningWheel.startAnimation(fabOpen);
+            mFabSearchWithPicture.startAnimation(fabOpen);
+            mFabSpinningWheel.setClickable(true);
+            mFabSearchWithPicture.setClickable(true);
+            isOpen = true;
+        }
     }
 
     @Override

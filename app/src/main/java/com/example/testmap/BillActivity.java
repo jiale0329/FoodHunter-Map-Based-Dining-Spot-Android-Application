@@ -28,6 +28,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -58,6 +59,7 @@ public class BillActivity extends AppCompatActivity {
     RecyclerView mRvBillRecord;
     private List<BillRecord> mBillRecord = new ArrayList<>();
     BillRecordAdapter adapter;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public static SharedPreferences mPreferences;
     private final String SHARED_PREF = "myPreferences";
@@ -76,6 +78,29 @@ public class BillActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.bill_activity_drawer_layout);
         navigationView = findViewById(R.id.bill_activity_nav_view);
         toolbar = findViewById(R.id.bill_activity_toolbar);
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView mTvHeaderProfileName = (TextView) headerView.findViewById(R.id.tvHeaderProfileName);
+
+        db.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            QuerySnapshot result = task.getResult();
+
+                            if(!result.isEmpty()){
+                                for (QueryDocumentSnapshot document : result) {
+
+                                    if (document.getId().equals(userId)){
+                                        mTvHeaderProfileName.setText(document.get("fullName").toString());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
 
         BillRecordLab billRecordLab = BillRecordLab.get(BillActivity.this, userId);
         mBillRecord = billRecordLab.getBillRecords();
