@@ -82,6 +82,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static android.location.Location.distanceBetween;
+
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, NavigationView.OnNavigationItemSelectedListener {
 
     private GoogleMap mMap;
@@ -181,7 +183,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View v) {
                 animateFab();
-//                getCurrLoc();
             }
         });
 
@@ -364,6 +365,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mIvPopupPicture = (ImageView) popupView.findViewById(R.id.ivPopupPicture);
                 Button mBtnPopUpAddToSpinningWheel = popupView.findViewById(R.id.btnPopUpAddToSpinningWheel);
                 Button mBtnPopUpViewRestaurantProfile = popupView.findViewById(R.id.btnPopUpViewDetails);
+                TextView mTvDistance = (TextView) popupView.findViewById(R.id.tvDistance);
+                float[] results = {};
 
                 for (DiningSpot diningSpot : mDiningSpot)
                 {
@@ -372,6 +375,22 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         mtvPopupTitle.setText(diningSpot.getmName());
                         mtvPopupAddress.setText("Address: " + diningSpot.getmAddress());
                         imageId = diningSpot.getmPictureUrl();
+
+                        mClient.getLastLocation().addOnCompleteListener(task -> {
+                            if (task.isSuccessful()){
+                                Location location = task.getResult();
+                                Location endPoint=new Location("locationA");
+                                endPoint.setLatitude(Double.parseDouble(diningSpot.getmLatitude()));
+                                endPoint.setLongitude(Double.parseDouble(diningSpot.getmLongitude()));
+                                float distanceCalculated = location.distanceTo(endPoint)/1000;
+
+                                int scale = (int) Math.pow(10, 1);
+                                double distance = (double) Math.round(distanceCalculated * scale) / scale;
+
+                                mTvDistance.setText("" + distance + " KM");
+                            }
+                        });
+
                     }
                 }
 

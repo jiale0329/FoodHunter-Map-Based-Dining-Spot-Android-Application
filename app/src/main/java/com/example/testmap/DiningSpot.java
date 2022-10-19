@@ -5,10 +5,11 @@ import java.util.List;
 public class DiningSpot {
     private String mId;
     private String mName;
-    private String  mLatitude;
+    private String mLatitude;
     private String mLongitude;
     private String mAddress;
     private String mPictureUrl;
+    private String mTypeOfCuisine;
     private List<RestaurantRating> mRestaurantRating;
     private double mRating = 0;
 
@@ -77,5 +78,13 @@ public class DiningSpot {
             mRating += (double)restaurantRating.getRating();
         }
         mRating /= mRestaurantRating.size();
+    }
+
+    public String getmTypeOfCuisine() {
+        return mTypeOfCuisine;
+    }
+
+    public void setmTypeOfCuisine(String mTypeOfCuisine) {
+        this.mTypeOfCuisine = mTypeOfCuisine;
     }
 }

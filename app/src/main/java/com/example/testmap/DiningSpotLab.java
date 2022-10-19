@@ -51,6 +51,7 @@ public class DiningSpotLab {
                                     diningSpot.setmLongitude(document.get("longitude").toString());
                                     diningSpot.setmAddress(document.get("address").toString());
                                     diningSpot.setmPictureUrl(document.get("pictureUrl").toString());
+                                    diningSpot.setmTypeOfCuisine(document.get("typeOfCuisine").toString());
                                     diningSpot.setmRestaurantRating(searchRating(document.getId(), context));
 
                                     ProgressDialog dialog = ProgressDialog.show(context, "",

@@ -9,15 +9,28 @@
     android:background="@drawable/my_border"
     android:padding="5dp">
 
-    <TextView
-        android:id="@+id/tvPopupTitle"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Title"
-        android:textSize="16dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"/>
+        android:layout_marginRight="5dp">
+
+        <TextView
+            android:id="@+id/tvPopupTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Title"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/ivPopupPicture"
@@ -46,6 +59,7 @@
         android:layout_height="40dp"
         android:text="View Details"
         android:textSize="12dp"
+        android:textColor="@color/black"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"/>
 
@@ -54,6 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="Add to Spinning Wheel"
+        android:textColor="@color/black"
         android:textSize="12dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"/>

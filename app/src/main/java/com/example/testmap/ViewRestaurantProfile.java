@@ -2,15 +2,21 @@ package com.example.testmap;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.app.ActionBar;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -22,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -42,8 +49,8 @@ import java.util.Map;
 
 public class ViewRestaurantProfile extends AppCompatActivity {
 
-    ImageView mIvRestaurantPicture;
-    TextView mTvRestaurantName, mTvRestaurantAddress, mTvRestaurantRating, mTvRatingSize;
+    ImageView mIvRestaurantPicture, mIvBackPress;
+    TextView mTvRestaurantName, mTvRestaurantAddress, mTvRestaurantRating, mTvRatingSize, mTvTypeOfCuisine, mTvDistanceViewRestaurant;
     String imageId, userId, restaurantId;
     StorageReference storageReference;
     Button mBtnRateRestaurantPopUp;
@@ -53,6 +60,7 @@ public class ViewRestaurantProfile extends AppCompatActivity {
     int fiveStar = 0, fourStar = 0, threeStar = 0, twoStar = 0, oneStar = 0;
     RatingBar mRbRating;
     Boolean rated = false;
+    private FusedLocationProviderClient mClient;
 
     public static final String EXTRA_RESTAURANT_ID = "restaurant_id";
     public static SharedPreferences mPreferences;
@@ -79,6 +87,11 @@ public class ViewRestaurantProfile extends AppCompatActivity {
         mLpiOneStar = findViewById(R.id.lpiOneStar);
         mRbRating = findViewById(R.id.rbRating);
         mTvRatingSize = findViewById(R.id.tvRatingSize);
+        mTvTypeOfCuisine = findViewById(R.id.tvTypeOfCuisine_viewRestaurant);
+        mTvDistanceViewRestaurant = findViewById(R.id.tvDistance_viewRestaurant);
+        mIvBackPress = findViewById(R.id.ivBackPress);
+
+        mClient = new FusedLocationProviderClient(this);
 
         mPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
         userId = mPreferences.getString(KEY_USER_ID, "");
@@ -86,17 +99,52 @@ public class ViewRestaurantProfile extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         restaurantId = bundle.getString(EXTRA_RESTAURANT_ID);
 
+        mIvBackPress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         ProgressDialog dialog = ProgressDialog.show(ViewRestaurantProfile.this, "",
                 "Loading......", true);
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                for (DiningSpot diningSpot : mDiningSpot){
-                    if (restaurantId.equals(diningSpot.getmId())){
+                for (DiningSpot diningSpot : mDiningSpot) {
+                    if (restaurantId.equals(diningSpot.getmId())) {
                         mTvRestaurantName.setText(diningSpot.getmName());
                         mTvRestaurantAddress.setText(diningSpot.getmAddress());
+                        mTvTypeOfCuisine.setText(diningSpot.getmTypeOfCuisine());
 
                         int scale = (int) Math.pow(10, 1);
+
+                        if (ActivityCompat.checkSelfPermission(ViewRestaurantProfile.this,
+                                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(ViewRestaurantProfile.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            // TODO: Consider calling
+                            //    ActivityCompat#requestPermissions
+                            // here to request the missing permissions, and then overriding
+                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                            //                                          int[] grantResults)
+                            // to handle the case where the user grants the permission. See the documentation
+                            // for ActivityCompat#requestPermissions for more details.
+                            return;
+                        }
+
+                        mClient.getLastLocation().addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                Location location = task.getResult();
+                                Location endPoint = new Location("locationA");
+                                endPoint.setLatitude(Double.parseDouble(diningSpot.getmLatitude()));
+                                endPoint.setLongitude(Double.parseDouble(diningSpot.getmLongitude()));
+                                float distanceCalculated = location.distanceTo(endPoint) / 1000;
+
+                                double distance = (double) Math.round(distanceCalculated * scale) / scale;
+
+                                mTvDistanceViewRestaurant.setText("" + distance + " KM");
+                            }
+                        });
+
                         double rating = (double) Math.round(diningSpot.getmRating() * scale) / scale;
 
                         mTvRestaurantRating.setText("" + rating);
