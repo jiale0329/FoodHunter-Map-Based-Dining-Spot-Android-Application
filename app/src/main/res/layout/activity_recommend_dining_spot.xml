@@ -25,26 +25,14 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/recommend_restaurant_toolbar"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#00772727"
+            android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent"
             map:navigationIcon="@drawable/menu_icon" />
-
-        <TextView
-            android:id="@+id/tvRecommendedRestaurant"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Recommended Restaurants"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:layout_marginTop="12dp"
-            map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvRecommendedRestaurant"

@@ -10,11 +10,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -347,7 +350,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 popupWindow.showAtLocation(popupView, Gravity.BOTTOM, 0, 150);
 
-
                 // dismiss the popup window when touched
                 popupView.setOnTouchListener(new View.OnTouchListener()
                 {
@@ -366,7 +368,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Button mBtnPopUpAddToSpinningWheel = popupView.findViewById(R.id.btnPopUpAddToSpinningWheel);
                 Button mBtnPopUpViewRestaurantProfile = popupView.findViewById(R.id.btnPopUpViewDetails);
                 TextView mTvDistance = (TextView) popupView.findViewById(R.id.tvDistance);
-                float[] results = {};
 
                 for (DiningSpot diningSpot : mDiningSpot)
                 {
@@ -390,7 +391,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 mTvDistance.setText("" + distance + " KM");
                             }
                         });
-
                     }
                 }
 
@@ -431,7 +431,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         {
                             if (diningSpot.getmId().equals(marker.getTitle()))
                             {
-                                sql.insertFoodChoice(MapsActivity.this, diningSpot.getmId(), diningSpot.getmName());
+
+                                Display display = getWindowManager().getDefaultDisplay();
+                                Point size = new Point();
+                                display.getSize(size);
+                                int width = size.x;
+                                int height = size.y;
+
+                                sql.insertFoodChoice(MapsActivity.this, diningSpot.getmId(), diningSpot.getmName(), width, height);
+
+                                popupWindow.dismiss();
                             }
                         }
                     }

@@ -6,40 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".PreviewSpinningWheelChoice">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSpinningWheelChoice"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/preview_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="55dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="41dp"
-        app:layout_constraintBottom_toTopOf="parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btnConfirmSpinningWheelChoice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Confirm Spinning Wheel Choice"
-        android:layout_marginBottom="3dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvSpinningWheelTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please Check Your Dining Spot Choice"
-        android:textStyle="bold"
-        android:textColor="@color/black"
         android:layout_marginTop="16dp"
+        android:text="Please Check Your Dining Spot Choice"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/preview_toolbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSpinningWheelChoice"
+        android:layout_width="match_parent"
+        android:layout_height="607dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSpinningWheelTitle" />
+
+    <Button
+        android:id="@+id/btnConfirmSpinningWheelChoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm Spinning Wheel Choice"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/black"
+        android:background="@drawable/round_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

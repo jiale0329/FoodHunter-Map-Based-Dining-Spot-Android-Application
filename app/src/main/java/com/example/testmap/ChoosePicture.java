@@ -1,12 +1,16 @@
 package com.example.testmap;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,6 +23,7 @@ public class ChoosePicture extends AppCompatActivity {
     Button mBtnChoosePicture, mBtnConfirmPicture;
     ImageView mIvImageSelected;
     public Uri imageSelectedUri;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,11 @@ public class ChoosePicture extends AppCompatActivity {
         }else {
             Toast.makeText(this, "OPENCV INSTALLED SUCCESSFULLY", Toast.LENGTH_SHORT).show();
         }
+
+        toolbar = findViewById(R.id.choosePicture_toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         mBtnChoosePicture = findViewById(R.id.btnChoosePicture);
         mBtnConfirmPicture = findViewById(R.id.btnConfirmImageSelected);
@@ -50,6 +60,16 @@ public class ChoosePicture extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void choosePicture() {

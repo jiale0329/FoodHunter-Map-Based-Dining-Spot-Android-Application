@@ -1,6 +1,7 @@
 package com.example.testmap;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -58,6 +59,8 @@ public class ViewRatedRestaurant extends AppCompatActivity {
         navigationView = findViewById(R.id.viewRatedRestaurant_nav_view);
         toolbar = findViewById(R.id.viewRatedRestaurant_toolbar);
         mRvRatedRestaurant = findViewById(R.id.rvRatedRestaurant);
+
+        setSupportActionBar(toolbar);
 
         View headerView = navigationView.getHeaderView(0);
         TextView mTvHeaderProfileName = (TextView) headerView.findViewById(R.id.tvHeaderProfileName);

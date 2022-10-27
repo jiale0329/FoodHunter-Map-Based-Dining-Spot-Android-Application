@@ -2,6 +2,7 @@ package com.example.testmap;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -88,6 +89,15 @@ public class SimilarityCalculationAdapter extends RecyclerView.Adapter<Similarit
 
             mTvDiningSpotName = itemView.findViewById(R.id.list_item_similarity_title);
             mTvSimilarityCalculation = itemView.findViewById(R.id.list_item_similarity_calculation);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(context, ViewRestaurantProfile.class);
+                    i.putExtra("restaurant_id", mDiningSpot.getmId());
+                    context.startActivity(i);
+                }
+            });
         }
 
         public void bindDiningSpot(DiningSpot diningSpot, int position, View itemView) throws IOException {

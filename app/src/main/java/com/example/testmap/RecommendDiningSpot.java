@@ -63,6 +63,8 @@ public class RecommendDiningSpot extends AppCompatActivity {
         toolbar = findViewById(R.id.recommend_restaurant_toolbar);
         mRvRecommendedRestaurant = findViewById(R.id.rvRecommendedRestaurant);
 
+        setSupportActionBar(toolbar);
+
         View headerView = navigationView.getHeaderView(0);
         TextView mTvHeaderProfileName = (TextView) headerView.findViewById(R.id.tvHeaderProfileName);
 

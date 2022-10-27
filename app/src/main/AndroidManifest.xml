@@ -17,11 +17,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestMap">
-        <activity android:name=".RecommendDiningSpot"></activity>
-        <activity android:name=".ViewRatedRestaurant" />
-        <activity android:name=".ViewRestaurantProfile" />
-        <activity android:name=".DebtRecordByIndividual" />
-        <activity android:name=".AddNewBillForm" />
+        <activity android:name=".RecommendDiningSpot"
+            android:label="Recommended Restaurants"/>
+        <activity android:name=".ViewRatedRestaurant"
+            android:label="Restaurants You Rated"/>
+        <activity android:name=".ViewRestaurantProfile"
+            android:label=""/>
+        <activity android:name=".DebtRecordByIndividual"
+            android:label="Debt Record"/>
+        <activity android:name=".AddNewBillForm"
+            android:label="New Bill Record"/>
         <activity android:name=".UserLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,11 +35,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".UserRegister" />
-        <activity android:name=".SimilarityCalculation" />
-        <activity android:name=".ChoosePicture" />
-        <activity android:name=".PreviewSpinningWheelChoice" />
-        <activity android:name=".SpinningWheel" />
-        <activity android:name=".BillActivity" />
+        <activity android:name=".SimilarityCalculation"
+            android:label="Similarity Calculation"/>
+        <activity android:name=".ChoosePicture"
+            android:label="Choose Picture"/>
+        <activity android:name=".PreviewSpinningWheelChoice"
+            android:label="Spinning Wheel"/>
+        <activity android:name=".SpinningWheel"
+            android:label="Spinning Wheel"/>
+        <activity android:name=".BillActivity"
+            android:label="Bill Record"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

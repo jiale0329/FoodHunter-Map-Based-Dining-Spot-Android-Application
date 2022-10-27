@@ -5,9 +5,19 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
+import android.graphics.Point;
+import android.os.CountDownTimer;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 
 import java.util.ArrayList;
 
@@ -26,17 +36,50 @@ public class SqliteHelper extends SQLiteOpenHelper {
         db.execSQL("drop Table if exists Foodchoice");
     }
 
-    public void insertFoodChoice(Context context, String id, String name){
+    public void insertFoodChoice(Context context, String id, String name, int width, int height){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("id", id);
         contentValues.put("name", name);
         long result = db.insert("Foodchoice", null, contentValues);
+
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View popupView = layoutInflater.inflate(R.layout.add_to_spinning_wheel_popup_layout, null);
+
+        PopupWindow popupWindow = new PopupWindow(popupView);
+        popupWindow.setWidth(width-40);
+        popupWindow.setHeight(height/2-400);
+        popupWindow.setFocusable(true);
+
+        popupWindow.showAtLocation(popupView, Gravity.TOP, 0, 10);
+
+        TextView mTvPopupNotificationContent = (TextView) popupView.findViewById(R.id.tvNotiPopupContent);
+        CardView mCvSpinningWheel = (CardView) popupView.findViewById(R.id.cvSpinningWheel);
+
         if (result==-1){
-            Toast.makeText(context, "Fail", Toast.LENGTH_SHORT).show();
+
+            mTvPopupNotificationContent.setText("You have FAILED to add " + name + " into the Spinning Wheel!");
+
+            mCvSpinningWheel.setCardBackgroundColor(Color.parseColor("#FFACA3"));
         }else{
-            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+
+            mTvPopupNotificationContent.setText("You have added " + name + " into Spinning Wheel SUCCESSFULLY!");
         }
+
+        new CountDownTimer(3000, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onFinish() {
+                // TODO Auto-generated method stub
+                popupWindow.dismiss();
+            }
+        }.start();
     }
 
     public ArrayList<DiningChoice> readDiningChoice(){

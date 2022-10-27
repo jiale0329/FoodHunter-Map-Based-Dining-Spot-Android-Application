@@ -21,7 +21,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/debtRecordByIndividual_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00772727"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent"
+            map:navigationIcon="@drawable/menu_icon" />
+
         <LinearLayout
+            android:id="@+id/linearLayout12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -60,41 +72,18 @@
                 android:text="Pay" />
         </LinearLayout>
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/debtRecordByIndividual_toolbar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="#00772727"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toTopOf="parent"
-            map:navigationIcon="@drawable/menu_icon" />
-
-        <TextView
-            android:id="@+id/tvIndividualDebtRecord"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Individual Debt Record"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:layout_marginTop="12dp"
-            map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toTopOf="parent" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvIndividualDebtRecord"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="80dp"
+            android:layout_height="634dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="16dp"
             map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toBottomOf="@+id/tvIndividualDebtRecord" />
+            map:layout_constraintTop_toBottomOf="@+id/linearLayout12" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

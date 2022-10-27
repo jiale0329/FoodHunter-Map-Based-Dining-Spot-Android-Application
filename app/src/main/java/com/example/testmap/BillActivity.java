@@ -35,6 +35,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -51,7 +52,6 @@ import java.util.List;
 
 public class BillActivity extends AppCompatActivity {
 
-    Button mBtnAddNewBillRecord;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
@@ -60,6 +60,7 @@ public class BillActivity extends AppCompatActivity {
     private List<BillRecord> mBillRecord = new ArrayList<>();
     BillRecordAdapter adapter;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FloatingActionButton fab;
 
     public static SharedPreferences mPreferences;
     private final String SHARED_PREF = "myPreferences";
@@ -73,11 +74,13 @@ public class BillActivity extends AppCompatActivity {
         mPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
         userId = mPreferences.getString(KEY_USER_ID, "");
 
+        fab = findViewById(R.id.billRecord_fab_add_newBill);
         mRvBillRecord = findViewById(R.id.rvBillRecord);
-        mBtnAddNewBillRecord = findViewById(R.id.btnAddNewBillRecord);
         drawerLayout = findViewById(R.id.bill_activity_drawer_layout);
         navigationView = findViewById(R.id.bill_activity_nav_view);
         toolbar = findViewById(R.id.bill_activity_toolbar);
+
+        setSupportActionBar(toolbar);
 
         View headerView = navigationView.getHeaderView(0);
         TextView mTvHeaderProfileName = (TextView) headerView.findViewById(R.id.tvHeaderProfileName);
@@ -128,7 +131,7 @@ public class BillActivity extends AppCompatActivity {
 
         checkMyPermission();
 
-        mBtnAddNewBillRecord.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BillActivity.this, AddNewBillForm.class);

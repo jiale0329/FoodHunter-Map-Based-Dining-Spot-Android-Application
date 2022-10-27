@@ -1,6 +1,8 @@
 package com.example.testmap;
 
-public class DiningChoice {
+import java.io.Serializable;
+
+public class DiningChoice implements Serializable {
     private String mId;
     private String mName;
 

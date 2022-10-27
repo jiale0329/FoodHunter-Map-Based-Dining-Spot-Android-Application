@@ -1,12 +1,12 @@
 package com.example.testmap;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
-import android.app.ActionBar;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,9 +17,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -49,7 +53,7 @@ import java.util.Map;
 
 public class ViewRestaurantProfile extends AppCompatActivity {
 
-    ImageView mIvRestaurantPicture, mIvBackPress;
+    ImageView mIvRestaurantPicture;
     TextView mTvRestaurantName, mTvRestaurantAddress, mTvRestaurantRating, mTvRatingSize, mTvTypeOfCuisine, mTvDistanceViewRestaurant;
     String imageId, userId, restaurantId;
     StorageReference storageReference;
@@ -61,6 +65,8 @@ public class ViewRestaurantProfile extends AppCompatActivity {
     RatingBar mRbRating;
     Boolean rated = false;
     private FusedLocationProviderClient mClient;
+    Toolbar toolbar;
+    Double latitude, longitude;
 
     public static final String EXTRA_RESTAURANT_ID = "restaurant_id";
     public static SharedPreferences mPreferences;
@@ -89,7 +95,11 @@ public class ViewRestaurantProfile extends AppCompatActivity {
         mTvRatingSize = findViewById(R.id.tvRatingSize);
         mTvTypeOfCuisine = findViewById(R.id.tvTypeOfCuisine_viewRestaurant);
         mTvDistanceViewRestaurant = findViewById(R.id.tvDistance_viewRestaurant);
-        mIvBackPress = findViewById(R.id.ivBackPress);
+
+        toolbar = findViewById(R.id.viewRestaurant_toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         mClient = new FusedLocationProviderClient(this);
 
@@ -98,13 +108,6 @@ public class ViewRestaurantProfile extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         restaurantId = bundle.getString(EXTRA_RESTAURANT_ID);
-
-        mIvBackPress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
         ProgressDialog dialog = ProgressDialog.show(ViewRestaurantProfile.this, "",
                 "Loading......", true);
@@ -116,6 +119,9 @@ public class ViewRestaurantProfile extends AppCompatActivity {
                         mTvRestaurantName.setText(diningSpot.getmName());
                         mTvRestaurantAddress.setText(diningSpot.getmAddress());
                         mTvTypeOfCuisine.setText(diningSpot.getmTypeOfCuisine());
+
+                        latitude = Double.parseDouble(diningSpot.getmLatitude());
+                        longitude = Double.parseDouble(diningSpot.getmLongitude());
 
                         int scale = (int) Math.pow(10, 1);
 
@@ -277,5 +283,28 @@ public class ViewRestaurantProfile extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.view_restaurant_profile_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            case R.id.navigate_menu:
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + latitude + "," + longitude);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+                return false;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -25,7 +25,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/bill_activity_toolbar"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#00772727"
             android:minHeight="?attr/actionBarSize"
@@ -34,39 +34,27 @@
             map:layout_constraintTop_toTopOf="parent"
             map:navigationIcon="@drawable/menu_icon" />
 
-        <TextView
-            android:id="@+id/tvBillRecordTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bill Record"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:layout_marginTop="12dp"
-            map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btnAddNewBillRecord"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add New Record"
-            map:layout_constraintBottom_toBottomOf="parent"
-            map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintStart_toStartOf="parent" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvBillRecord"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="60dp"
+            android:layout_height="657dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="60dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="55dp"
-            map:layout_constraintBottom_toTopOf="@+id/btnAddNewBillRecord"
+            map:layout_constraintBottom_toBottomOf="parent"
             map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toBottomOf="@+id/tvBillRecordTitle" />
+            map:layout_constraintTop_toBottomOf="@+id/bill_activity_toolbar" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/billRecord_fab_add_newBill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_add"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

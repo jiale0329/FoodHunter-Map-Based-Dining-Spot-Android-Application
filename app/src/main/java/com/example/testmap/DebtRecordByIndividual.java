@@ -56,6 +56,8 @@ public class DebtRecordByIndividual extends AppCompatActivity {
         toolbar = findViewById(R.id.debtRecordByIndividual_toolbar);
         mRvDebtRecord = findViewById(R.id.rvIndividualDebtRecord);
 
+        setSupportActionBar(toolbar);
+
         View headerView = navigationView.getHeaderView(0);
         TextView mTvHeaderProfileName = (TextView) headerView.findViewById(R.id.tvHeaderProfileName);
 

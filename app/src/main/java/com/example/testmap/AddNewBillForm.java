@@ -2,7 +2,9 @@ package com.example.testmap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +18,7 @@ import android.os.Handler;
 import android.provider.ContactsContract;
 import android.provider.Telephony;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -56,6 +59,7 @@ public class AddNewBillForm extends AppCompatActivity {
     DatePicker mDpMealDate;
     private String payerId;
     String mealParticipants;
+    Toolbar toolbar;
 
     public static SharedPreferences mPreferences;
     private final String SHARED_PREF = "myPreferences";
@@ -81,6 +85,11 @@ public class AddNewBillForm extends AppCompatActivity {
         mEtMealBillAmount = findViewById(R.id.etMealBillAmount);
         mEtBillRecordTitle = findViewById(R.id.etBillRecordTitle);
         mDpMealDate = findViewById(R.id.dpMealDate);
+
+        toolbar = findViewById(R.id.newBillForm_toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         mPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
 
@@ -110,6 +119,16 @@ public class AddNewBillForm extends AppCompatActivity {
                 uploadBillRecord();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void uploadBillRecord() {
