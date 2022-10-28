@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_centerInParent="true"
+        app:cardCornerRadius="10dp"
+        app:strokeWidth="0.2dp"
+        app:strokeColor="@color/black">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvDebtPopupMealMateName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="16dp"
+                android:text="Meal Mate"
+                android:textSize="25dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvDebtPopupReceiveTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center"
+                        android:text="Receive"
+                        android:textSize="12dp"
+                        android:textStyle=""/>
+
+                    <TextView
+                        android:id="@+id/tvDebtPopupReceiveContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center"
+                        android:text="RM 0.00"
+                        android:textSize="16dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@color/darkerGray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvDebtPopupPayTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center"
+                        android:text="Pay"
+                        android:textSize="12dp"
+                        android:textStyle=""/>
+
+                    <TextView
+                        android:id="@+id/tvDebtPopupPayContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center"
+                        android:text="RM 0.00"
+                        android:textSize="16dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnDebtPopupSettleBill"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Settle Bill"
+                android:textSize="12dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+
+            <Button
+                android:id="@+id/btnDebtPopupSendReminder"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Send Reminder"
+                android:textSize="12dp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

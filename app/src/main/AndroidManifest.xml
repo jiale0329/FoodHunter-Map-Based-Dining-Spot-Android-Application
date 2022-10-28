@@ -17,16 +17,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestMap">
-        <activity android:name=".RecommendDiningSpot"
-            android:label="Recommended Restaurants"/>
-        <activity android:name=".ViewRatedRestaurant"
-            android:label="Restaurants You Rated"/>
-        <activity android:name=".ViewRestaurantProfile"
-            android:label=""/>
-        <activity android:name=".DebtRecordByIndividual"
-            android:label="Debt Record"/>
-        <activity android:name=".AddNewBillForm"
-            android:label="New Bill Record"/>
+        <activity android:name=".SettleBill"
+            android:label="Settle Bill"/>
+        <activity
+            android:name=".ViewBillRecordDetails"
+            android:label="" />
+        <activity
+            android:name=".RecommendDiningSpot"
+            android:label="Recommended Restaurants" />
+        <activity
+            android:name=".ViewRatedRestaurant"
+            android:label="Restaurants You Rated" />
+        <activity
+            android:name=".ViewRestaurantProfile"
+            android:label="" />
+        <activity
+            android:name=".DebtRecordByIndividual"
+            android:label="Debt Record" />
+        <activity
+            android:name=".AddNewBillForm"
+            android:label="New Bill Record" />
         <activity android:name=".UserLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,16 +45,21 @@
             </intent-filter>
         </activity>
         <activity android:name=".UserRegister" />
-        <activity android:name=".SimilarityCalculation"
-            android:label="Similarity Calculation"/>
-        <activity android:name=".ChoosePicture"
-            android:label="Choose Picture"/>
-        <activity android:name=".PreviewSpinningWheelChoice"
-            android:label="Spinning Wheel"/>
-        <activity android:name=".SpinningWheel"
-            android:label="Spinning Wheel"/>
-        <activity android:name=".BillActivity"
-            android:label="Bill Record"/>
+        <activity
+            android:name=".SimilarityCalculation"
+            android:label="Similarity Calculation" />
+        <activity
+            android:name=".ChoosePicture"
+            android:label="Choose Picture" />
+        <activity
+            android:name=".PreviewSpinningWheelChoice"
+            android:label="Spinning Wheel" />
+        <activity
+            android:name=".SpinningWheel"
+            android:label="Spinning Wheel" />
+        <activity
+            android:name=".BillActivity"
+            android:label="Bill Record" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

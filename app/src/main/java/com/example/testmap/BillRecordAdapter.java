@@ -1,6 +1,7 @@
 package com.example.testmap;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,15 @@ public class BillRecordAdapter extends RecyclerView.Adapter<BillRecordAdapter.Bi
             mTvBillRecordTitle = itemView.findViewById(R.id.list_item_bill_record_title);
             mTvBillRecordDate = itemView.findViewById(R.id.list_item_bill_record_dateTime);
             mTvBillRecordAmount = itemView.findViewById(R.id.list_item_bill_record_amount);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(context, ViewBillRecordDetails.class);
+                    i.putExtra("billRecord_id", mBillRecord.getBillRecordId());
+                    context.startActivity(i);
+                }
+            });
         }
 
         public void bindBillRecord(BillRecord billRecord){

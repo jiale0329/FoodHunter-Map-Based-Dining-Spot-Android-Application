@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -93,13 +95,19 @@ public class DebtRecordByIndividual extends AppCompatActivity {
         MealMateLab mealMateLab = MealMateLab.get(DebtRecordByIndividual.this, userId);
         mMealMate = mealMateLab.getMealMates();
 
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
         ProgressDialog dialog = ProgressDialog.show(DebtRecordByIndividual.this, "",
                 "Loading......", true);
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
                 mRvDebtRecord.setLayoutManager(new LinearLayoutManager(DebtRecordByIndividual.this));
-                adapter = new MealMateDebtRecordAdapter(mMealMate, DebtRecordByIndividual.this);
+                adapter = new MealMateDebtRecordAdapter(mMealMate, DebtRecordByIndividual.this, width, height);
                 mRvDebtRecord.setAdapter(adapter);
                 dialog.dismiss();
             }

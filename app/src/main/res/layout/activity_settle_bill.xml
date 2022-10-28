@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettleBill">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/settleBill_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00772727"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/settleBill_toolbar">
+
+        <TextView
+            android:id="@+id/tvSettleBillMealMateName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:text="Meal Mate"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/viewNameLine1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:text="Receive"
+                    android:textSize="12dp"
+                    android:textStyle="" />
+
+                <TextView
+                    android:id="@+id/tvSettleBillReceiveAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:text="RM 0.00"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/darkerGray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:text="Pay"
+                    android:textSize="12dp"
+                    android:textStyle="" />
+
+                <TextView
+                    android:id="@+id/tvSettleBillPayAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:text="RM 0.00"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/viewNameLine2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="16dp"
+            android:text="SETTLE BILL"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center_vertical"
+                android:text="You Paid : "
+                android:textSize="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etSettleBillPay"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:hint="RM 0.00"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:endIconMode="clear_text"
+                app:boxStrokeWidthFocused="2dp"
+                app:boxStrokeColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center_vertical"
+                android:text="You Received : "
+                android:textSize="16dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etSettleBillReceive"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:layout_weight="1"
+                android:hint="RM 0.00"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:endIconMode="clear_text"
+                app:boxStrokeWidthFocused="2dp"
+                app:boxStrokeColor="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSettleBillSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/round_button"
+        android:text="Submit"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
