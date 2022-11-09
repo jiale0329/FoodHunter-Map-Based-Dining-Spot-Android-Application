@@ -188,6 +188,11 @@ public class RecommendDiningSpot extends AppCompatActivity {
                 break;
             case R.id.nav_recommend_dining_spot:
                 break;
+            case R.id.nav_change_password:
+                Intent intentChangePassword = new Intent(RecommendDiningSpot.this, ChangePassword.class);
+                startActivity(intentChangePassword);
+                finish();
+                break;
             case R.id.nav_logout:
                 SharedPreferences myPreferences = getSharedPreferences("myPreferences", MODE_PRIVATE);
                 SharedPreferences.Editor spEditor = UserLogin.mPreferences.edit();

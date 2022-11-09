@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,15 +22,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserRegister extends AppCompatActivity {
 
-    Button mBtnRegisterAcc, mBtnNavigateToLogin;
+    Button mBtnRegisterAcc;
     TextInputLayout etFullName, etUserPhone, etUserEmail, etUserPassword;
     String userName, userEmail, userPhone, userPassword;
-    ImageView ivBack;
+    TextView mTvNavigateToLogin;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseAuth mAuth;
 
@@ -39,12 +42,11 @@ public class UserRegister extends AppCompatActivity {
         setContentView(R.layout.activity_user_register);
 
         mBtnRegisterAcc = (Button) findViewById(R.id.btnRegisterAcc);
-        ivBack = findViewById(R.id.ivBack);
         etFullName = findViewById(R.id.etName);
         etUserEmail =  findViewById(R.id.etUserEmail);
         etUserPhone =  findViewById(R.id.etUserPhone);
         etUserPassword =findViewById(R.id.etUserPassword);
-        mBtnNavigateToLogin = (Button) findViewById(R.id.btnNavigateToLogin);
+        mTvNavigateToLogin = (TextView) findViewById(R.id.tvNavigateToLogin);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -55,7 +57,7 @@ public class UserRegister extends AppCompatActivity {
             }
         });
 
-        mBtnNavigateToLogin.setOnClickListener(new View.OnClickListener() {
+        mTvNavigateToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(UserRegister.this, UserLogin.class);

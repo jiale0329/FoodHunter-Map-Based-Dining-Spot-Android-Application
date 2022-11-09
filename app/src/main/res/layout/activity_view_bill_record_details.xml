@@ -17,149 +17,132 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvBillRecordTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:text="BillRecordTitle"
-        android:textColor="@color/black"
-        android:textSize="23dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewRestaurant_toolbar" />
-
     <LinearLayout
         android:id="@+id/linearLayoutBillDetails1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBillRecordTitle">
-
-        <TextView
-            android:id="@+id/tvBillRecordDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="BillRecordDate" />
-
-    </LinearLayout>
-
-    <View
-        android:id="@+id/viewNameLine"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutBillDetails1"/>
-
-    <LinearLayout
-        android:id="@+id/linearLayoutBillDetails2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewNameLine">
+        app:layout_constraintTop_toBottomOf="@+id/viewRestaurant_toolbar">
 
-        <TextView
-            android:id="@+id/tvBillRecordTotalAmountTitle"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilBillRecordTitle"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total Amount" />
+            android:hint="Bill Record Title"
+            android:textColorHint="@color/black"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidthFocused="2dp"
+            app:endIconTint="@color/black"
+            app:hintTextColor="@color/black"
+            app:startIconDrawable="@drawable/ic_title"
+            app:startIconTint="@color/black"
+            app:boxBackgroundColor="@color/white">
 
-        <TextView
-            android:id="@+id/tvBillRecordTotalAmountContent"
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="none"
+                android:enabled="false"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilBillRecordDate"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="BillRecordTotalAmountContent"
-            android:textColor="@color/black"
-            android:textSize="17dp" />
-    </LinearLayout>
+            android:hint="Bill Record Date"
+            android:textColorHint="@color/black"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidthFocused="2dp"
+            app:endIconTint="@color/black"
+            app:hintTextColor="@color/black"
+            app:startIconDrawable="@drawable/ic_password"
+            app:startIconTint="@color/black"
+            app:boxBackgroundColor="@color/white">
 
-    <View
-        android:id="@+id/viewNameLine2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutBillDetails2"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="none"
+                android:enabled="false"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayoutBIllDetails3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewNameLine2">
-
-        <TextView
-            android:id="@+id/tvBillRecordPaidByTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Paid by : " />
-
-        <TextView
-            android:id="@+id/tvBillRecordPaidByContent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilBillRecordTotalAmountContent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="BillRecordPaidByContent"
-            android:layout_weight="1"
-            android:textColor="@color/black"
-            android:textSize="17dp" />
-    </LinearLayout>
+            android:hint="Total Amount"
+            android:textColorHint="@color/black"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidthFocused="2dp"
+            app:endIconTint="@color/black"
+            app:hintTextColor="@color/black"
+            app:startIconDrawable="@drawable/ic_total_amount"
+            app:startIconTint="@color/black"
+            app:boxBackgroundColor="@color/white">
 
-    <LinearLayout
-        android:id="@+id/linearLayoutBillDetails4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="16dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutBIllDetails3">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="none"
+                android:enabled="false"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tvBillRecordParticipantsTitle"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilBillRecordPaidByContent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Participants" />
+            android:hint="Paid By"
+            android:textColorHint="@color/black"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidthFocused="2dp"
+            app:endIconTint="@color/black"
+            app:hintTextColor="@color/black"
+            app:startIconDrawable="@drawable/ic_name"
+            app:startIconTint="@color/black"
+            app:boxBackgroundColor="@color/white">
 
-        <TextView
-            android:id="@+id/tvBillRecordParticipantsContent"
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="none"
+                android:enabled="false"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilBillRecordParticipantsContent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="BillRecordParticipantsContent"
-            android:textColor="@color/black"
-            android:textSize="17dp" />
+            android:hint="Participants"
+            android:textColorHint="@color/black"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidthFocused="2dp"
+            app:endIconTint="@color/black"
+            app:hintTextColor="@color/black"
+            app:startIconDrawable="@drawable/ic_name"
+            app:startIconTint="@color/black"
+            app:boxBackgroundColor="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="none"
+                android:enabled="false"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnRateRestaurantPopUp"
+        android:id="@+id/btnDeleteBillrecord"
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_marginBottom="16dp"

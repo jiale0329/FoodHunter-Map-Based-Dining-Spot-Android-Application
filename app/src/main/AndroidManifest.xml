@@ -17,8 +17,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestMap">
-        <activity android:name=".SettleBill"
-            android:label="Settle Bill"/>
+        <activity android:name=".ChangePassword"></activity>
+        <activity
+            android:name=".SettleBill"
+            android:label="Settle Bill" />
         <activity
             android:name=".ViewBillRecordDetails"
             android:label="" />

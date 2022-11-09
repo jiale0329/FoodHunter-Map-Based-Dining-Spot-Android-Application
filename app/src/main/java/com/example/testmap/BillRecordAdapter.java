@@ -1,5 +1,6 @@
 package com.example.testmap;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -61,6 +62,7 @@ public class BillRecordAdapter extends RecyclerView.Adapter<BillRecordAdapter.Bi
                     Intent i = new Intent(context, ViewBillRecordDetails.class);
                     i.putExtra("billRecord_id", mBillRecord.getBillRecordId());
                     context.startActivity(i);
+                    ((Activity)context).finish();
                 }
             });
         }

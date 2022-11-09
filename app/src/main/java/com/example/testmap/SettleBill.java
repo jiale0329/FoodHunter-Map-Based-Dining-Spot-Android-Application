@@ -98,7 +98,7 @@ public class SettleBill extends AppCompatActivity {
                         }
 
                         if (mealMate.getAmountToReceive() == 0){
-                            mEtSettleBillReceive.setHint("No Bill To Receive");
+                            mEtSettleBillReceive.setHint("No Bill To Pay");
                             mEtSettleBillReceive.setEnabled(false);
                         }else{
                             mEtSettleBillReceive.setHintTextColor(ColorStateList.valueOf(R.color.black));

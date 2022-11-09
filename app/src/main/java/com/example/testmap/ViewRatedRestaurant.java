@@ -136,6 +136,11 @@ public class ViewRatedRestaurant extends AppCompatActivity {
                 startActivity(intentRecommend);
                 finish();
                 break;
+            case R.id.nav_change_password:
+                Intent intentChangePassword = new Intent(ViewRatedRestaurant.this, ChangePassword.class);
+                startActivity(intentChangePassword);
+                finish();
+                break;
             case R.id.nav_logout:
                 SharedPreferences myPreferences = getSharedPreferences("myPreferences", MODE_PRIVATE);
                 SharedPreferences.Editor spEditor = UserLogin.mPreferences.edit();
