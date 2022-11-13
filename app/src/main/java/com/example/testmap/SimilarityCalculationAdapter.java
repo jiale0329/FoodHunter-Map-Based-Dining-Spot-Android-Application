@@ -163,7 +163,7 @@ public class SimilarityCalculationAdapter extends RecyclerView.Adapter<Similarit
                     String z = "" + res*100 + "%";
                     mTvSimilarityCalculation.setText(z);
 
-                    if ((res*100) > 95){
+                    if ((res*100) > 70){
                         temp = diningSpot;
                         mDiningSpotList.clear();
                         mDiningSpotList.add(diningSpot);
